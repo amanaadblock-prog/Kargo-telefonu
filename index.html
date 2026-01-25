@@ -5,150 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Kargo Telefon</title>
     <style>
-        :root {
-            --gold: #f1c40f;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text-white: #ffffff;
-        }
-
-        body { 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
-            background: var(--dark-bg); 
-            color: var(--text-white); 
-            margin: 0; 
-            padding: 0; 
-        }
-
-        /* Kamera (Notch) üçin ýokardan boşluk */
-        .safe-area {
-            height: 40px; /* Kameranyň aşagyna düşer ýaly */
-            background: #000;
-        }
-
-        /* Diller bölümi */
-        .lang-bar { 
-            background: #000; 
-            padding: 15px 10px; 
-            display: flex; 
-            justify-content: center; 
-            gap: 10px; 
-            border-bottom: 1px solid #333;
-        }
-
-        .lang-bar button { 
-            background: #222; 
-            border: 1px solid var(--gold); 
-            color: var(--text-white); 
-            padding: 8px 12px; 
-            border-radius: 8px; 
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .lang-bar button.active { 
-            background: var(--gold); 
-            color: #000; 
-        }
-
-        header { 
-            padding: 30px 20px; 
-            text-align: center; 
-        }
-
-        header h1 { margin: 0; font-size: 26px; color: var(--gold); text-transform: uppercase; }
-        header p { color: #888; margin-top: 5px; }
-
+        :root { --gold: #f1c40f; --dark-bg: #121212; --card-bg: #1e1e1e; --text-white: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding: 0; }
+        .safe-area { height: 40px; background: #000; }
+        .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
+        .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+        .lang-bar button.active { background: var(--gold); color: #000; }
+        header { padding: 30px 20px; text-align: center; }
+        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; }
         .container { padding: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; }
-        .img-box { height: 200px; background: #252525; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #555; }
-        
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
+        .img-box { height: 200px; background: #252525; display: flex; align-items: center; justify-content: center; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
         .info { padding: 20px; }
-        .info h3 { margin: 0; font-size: 20px; }
         .price { font-size: 24px; color: var(--gold); font-weight: bold; margin: 15px 0; }
-        
-        .buy-btn { 
-            display: block; 
-            background: var(--gold); 
-            color: #000; 
-            text-align: center; 
-            padding: 15px; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-weight: bold; 
-            font-size: 16px;
-        }
-
-        /* Internet Warning */
-        #offline-warning { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.95); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; 
-        }
+        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
+        #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
-
-    <div id="offline-warning">
-        <h1 style="color:red; font-size: 50px;">⚠️</h1>
-        <h2 id="off-text">Bağlantı Yok</h2>
-    </div>
-
+    <div id="offline-warning"><h1>⚠️</h1><h2 id="off-text">Baglanyşyk ýok</h2></div>
     <div class="safe-area"></div>
-
     <div class="lang-bar">
-        <button onclick="setLang('tm')" id="btn-tm" class="active">🇹🇲 TM</button>
-        <button onclick="setLang('tr')" id="btn-tr">🇹🇷 TR</button>
-        <button onclick="setLang('ru')" id="btn-ru">🇷🇺 RU</button>
-        <button onclick="setLang('en')" id="btn-en">🇺🇸 EN</button>
+        <button onclick="changeLang('tm')" id="btn-tm" class="active">🇹🇲 TM</button>
+        <button onclick="changeLang('tr')" id="btn-tr">🇹🇷 TR</button>
+        <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
+        <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
     </div>
-
-    <header>
-        <h1 id="main-title">Kargo Telefon</h1>
-        <p id="sub-title">Amatly we Çalt Eltip Bermek</p>
-    </header>
-
-    <div class="container">
-        <div class="card">
-            <div class="img-box">SURAT ÝOK</div>
-            <div class="info">
-                <h3>iPhone 15 Pro Max</h3>
-                <p class="price">28,500 TMT</p>
-                <a href="https://wa.me/99364041065" class="buy-btn" id="btn-buy-1">Sargyt Et</a>
-            </div>
-        </div>
-    </div>
+    <header><h1 id="main-title">Kargo Telefon</h1><p id="sub-title">Amatly we Çalt Eltip Bermek</p></header>
+    <div class="container" id="product-list"></div>
 
     <script>
-        const translations = {
-            tm: { title: "Kargo Telefon", sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet baglanyşygy ýok!" },
-            tr: { title: "Kargo Telefon", sub: "Uygun ve Hızlı Teslimat", buy: "Sipariş Ver", off: "İnternet bağlantısı yok!" },
-            ru: { title: "Карго Телефон", sub: "Доставка по лучшим ценам", buy: "Заказать", off: "Нет интернета!" },
-            en: { title: "Kargo Phone", sub: "Fast and Safe Delivery", buy: "Order Now", off: "No Internet!" }
+        let currentLang = 'tm';
+        const trans = {
+            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!" },
+            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!" },
+            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!" },
+            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!" }
         };
 
-        function setLang(lang) {
-            // Tekstleri çalşyrmak
-            document.getElementById('main-title').innerText = translations[lang].title;
-            document.getElementById('sub-title').innerText = translations[lang].sub;
-            document.getElementById('off-text').innerText = translations[lang].off;
-            
-            // Ähli Sargyt düwmelerini tapyp terjime etmek
-            document.querySelectorAll('.buy-btn').forEach(btn => {
-                btn.innerText = translations[lang].buy;
-            });
-
-            // Düwmeleriň reňkini (active) sazlamak
-            document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + lang).classList.add('active');
+        async function loadProducts() {
+            try {
+                const response = await fetch('products.json');
+                const products = await response.json();
+                const list = document.getElementById('product-list');
+                list.innerHTML = '';
+                products.forEach(p => {
+                    list.innerHTML += `
+                        <div class="card">
+                            <div class="img-box"><img src="${p.image}" alt="${p.name}"></div>
+                            <div class="info">
+                                <h3>${p.name}</h3>
+                                <p class="price">${p.price} TMT</p>
+                                <a href="https://wa.me/99364041065?text=Salam, men ${p.name} aljak" class="buy-btn">${trans[currentLang].buy}</a>
+                            </div>
+                        </div>`;
+                });
+            } catch (e) { console.log("Harytlar ýüklenmedi"); }
         }
 
-        // Internet barlaýjy
-        window.addEventListener('offline', () => { document.getElementById('offline-warning').style.display = "flex"; });
-        window.addEventListener('online', () => { document.getElementById('offline-warning').style.display = "none"; });
+        function changeLang(l) {
+            currentLang = l;
+            document.getElementById('sub-title').innerText = trans[l].sub;
+            document.getElementById('off-text').innerText = trans[l].off;
+            document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + l).classList.add('active');
+            loadProducts();
+        }
+
+        window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
+        window.addEventListener('online', () => document.getElementById('offline-warning').style.display = 'none');
+        loadProducts();
     </script>
 </body>
 </html>
