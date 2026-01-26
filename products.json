@@ -1,13 +1,16 @@
 [
   {
     "name": "iPhone 17 Pro",
+    "specs": "256GB | 1 SIM | Silver | Aktiv",
     "price": "1,750$ (79,625 TL)",
     "images": [
       "shopping.webp",
       "surat2.webp",
       "surat3.webp",
       "surat4.webp",
-      "surat5.webp"
+      "surat5.webp",
+      "surat6.webp",
+      "surat7.webp"
     ]
   }
 ]
