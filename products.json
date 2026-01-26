@@ -2,6 +2,12 @@
   {
     "name": "iPhone 17 Pro",
     "price": "1,750$ (79,625 TL)",
-    "image": "shopping.webp"
+    "images": [
+      "shopping.webp",
+      "surat2.webp",
+      "surat3.webp",
+      "surat4.webp",
+      "surat5.webp"
+    ]
   }
 ]
