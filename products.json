@@ -55,5 +55,16 @@
       "s25u_3.jpg",
       "s25u_4.jpg"
     ]
+  },
+  {
+    "name": "Samsung A07",
+    "specs": "4/64GB | Täze | Amatly baha",
+    "price": "90$ (4,095 TL)",
+    "images": [
+      "a07_1.jpg",
+      "a07_2.jpg",
+      "a07_3.jpg",
+      "a07_4.jpg"
+    ]
   }
 ]
