@@ -15,16 +15,17 @@
         header { padding: 30px 20px; text-align: center; }
         header h1 { margin: 0; color: var(--gold); text-transform: uppercase; }
         .container { padding: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; }
         
         /* Slider Dizaýny */
-        .swiper { width: 100%; height: 250px; background: #252525; }
+        .swiper { width: 100%; height: 280px; background: #252525; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
         .swiper-pagination-bullet { background: var(--gold) !important; }
 
         .info { padding: 20px; }
-        .price { font-size: 24px; color: var(--gold); font-weight: bold; margin: 15px 0; }
+        .specs { color: #aaa; font-size: 14px; margin-bottom: 10px; }
+        .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
         .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
         #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
     </style>
@@ -59,7 +60,6 @@
                 list.innerHTML = '';
                 
                 products.forEach((p, index) => {
-                    // Suratlar sanawyny (slider) döretmek
                     let slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
                     
                     list.innerHTML += `
@@ -70,16 +70,17 @@
                             </div>
                             <div class="info">
                                 <h3>${p.name}</h3>
+                                <div class="specs">${p.specs}</div>
                                 <p class="price">${p.price}</p>
-                                <a href="https://wa.me/99364041065?text=Salam, men ${p.name} aljak" class="buy-btn">${trans[currentLang].buy}</a>
+                                <a href="https://wa.me/99364041065?text=Salam, men ${p.name} (${p.specs}) sargyt etmek isleýärin." class="buy-btn">${trans[currentLang].buy}</a>
                             </div>
                         </div>`;
                 });
 
-                // Her bir haryt üçin slideri işledýäris
                 products.forEach((p, index) => {
                     new Swiper(`.mySwiper-${index}`, {
                         pagination: { el: ".swiper-pagination", clickable: true },
+                        loop: true
                     });
                 });
 
