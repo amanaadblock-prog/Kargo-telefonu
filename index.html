@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Kargo Telefon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root { --gold: #f1c40f; --dark-bg: #121212; --card-bg: #1e1e1e; --text-white: #ffffff; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding: 0; }
@@ -15,8 +16,13 @@
         header h1 { margin: 0; color: var(--gold); text-transform: uppercase; }
         .container { padding: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
-        .img-box { height: 200px; background: #252525; display: flex; align-items: center; justify-content: center; }
-        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+        
+        /* Slider Dizaýny */
+        .swiper { width: 100%; height: 250px; background: #252525; }
+        .swiper-slide { display: flex; align-items: center; justify-content: center; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
+        .swiper-pagination-bullet { background: var(--gold) !important; }
+
         .info { padding: 20px; }
         .price { font-size: 24px; color: var(--gold); font-weight: bold; margin: 15px 0; }
         .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
@@ -35,6 +41,7 @@
     <header><h1 id="main-title">Kargo Telefon</h1><p id="sub-title">Amatly we Çalt Eltip Bermek</p></header>
     <div class="container" id="product-list"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
         const trans = {
@@ -50,17 +57,32 @@
                 const products = await response.json();
                 const list = document.getElementById('product-list');
                 list.innerHTML = '';
-                products.forEach(p => {
+                
+                products.forEach((p, index) => {
+                    // Suratlar sanawyny (slider) döretmek
+                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
+                    
                     list.innerHTML += `
                         <div class="card">
-                            <div class="img-box"><img src="${p.image}" alt="${p.name}"></div>
+                            <div class="swiper mySwiper-${index}">
+                                <div class="swiper-wrapper">${slides}</div>
+                                <div class="swiper-pagination"></div>
+                            </div>
                             <div class="info">
                                 <h3>${p.name}</h3>
-                                <p class="price">${p.price} TMT</p>
+                                <p class="price">${p.price}</p>
                                 <a href="https://wa.me/99364041065?text=Salam, men ${p.name} aljak" class="buy-btn">${trans[currentLang].buy}</a>
                             </div>
                         </div>`;
                 });
+
+                // Her bir haryt üçin slideri işledýäris
+                products.forEach((p, index) => {
+                    new Swiper(`.mySwiper-${index}`, {
+                        pagination: { el: ".swiper-pagination", clickable: true },
+                    });
+                });
+
             } catch (e) { console.log("Harytlar ýüklenmedi"); }
         }
 
