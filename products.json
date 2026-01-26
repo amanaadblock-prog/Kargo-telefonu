@@ -1,7 +1,7 @@
 [
   {
     "name": "iPhone 17 Pro",
-    "specs": "256GB | 1 SIM | Silver | Aktiv",
+    "specs": "256GB | Silver | 1 SIM | Aktiv",
     "price": "1,750$ (79,625 TL)",
     "images": [
       "shopping.webp",
@@ -12,16 +12,16 @@
       "surat6.webp",
       "surat7.webp"
     ]
+  },
+  {
+    "name": "iPhone 17 Pro Max",
+    "specs": "256GB | Blue | 1 SIM | Täze",
+    "price": "1,900$ (86,450 TL)",
+    "images": [
+      "max1.jpg",
+      "max2.jpg",
+      "max3.png",
+      "max4.png"
+    ]
   }
 ]
-{
-  "name": "iPhone 17 Pro Max",
-  "specs": "256GB | Blue | 1 SIM | Täze",
-  "price": "1,900$ (86,450 TL)",
-  "images": [
-    "max1.jpg",
-    "max2.jpg",
-    "max3.png",
-    "max4.png"
-  ]
-}
