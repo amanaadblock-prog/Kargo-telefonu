@@ -23,5 +23,16 @@
       "max3.jpg",
       "max4.jpg"
     ]
+  },
+  {
+    "name": "iPhone 17 Pro Orange",
+    "specs": "256GB | Orange | 1 SIM | Täze",
+    "price": "1,750$ (79,625 TL)",
+    "images": [
+      "orange1.jpg",
+      "orange2.jpg",
+      "orange3.jpg",
+      "orange4.jpg"
+    ]
   }
 ]
