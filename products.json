@@ -44,5 +44,16 @@
       "s24_2.jpg",
       "s24_3.jpg"
     ]
+  },
+  {
+    "name": "Samsung S25 Ultra",
+    "specs": "12/256GB | Gray, Blue, Black | Täze",
+    "price": "1,000$ (45,500 TL)",
+    "images": [
+      "s25u_1.jpg",
+      "s25u_2.jpg",
+      "s25u_3.jpg",
+      "s25u_4.jpg"
+    ]
   }
 ]
