@@ -13,26 +13,33 @@
         .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
         .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
         .lang-bar button.active { background: var(--gold); color: #000; }
-        header { padding: 20px; text-align: center; }
-        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
         
-        /* Täze goşulan marka düwmeleri stili */
-        .brand-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 10px; }
-        .brand-nav button { background: #222; border: 1px solid #444; color: #fff; padding: 10px 15px; border-radius: 12px; cursor: pointer; font-size: 14px; display: flex; flex-direction: column; align-items: center; min-width: 70px; }
-        .brand-nav button.active { border-color: var(--gold); color: var(--gold); }
-        .brand-nav i { font-size: 20px; margin-bottom: 5px; }
+        header { padding: 25px; text-align: center; }
+        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
+        .welcome-msg { color: #f1c40f; font-size: 14px; padding: 0 20px; line-height: 1.5; margin-bottom: 20px; }
 
-        .container { padding: 15px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
-        .swiper { width: 100%; height: 300px; background: #000; }
+        /* Marka Düwmeleri */
+        .brand-nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 10px; margin-bottom: 20px; }
+        .brand-nav button { background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 15px; cursor: pointer; min-width: 75px; transition: 0.3s; }
+        .brand-nav button.active { border-color: var(--gold); background: #222; color: var(--gold); box-shadow: 0 0 10px rgba(241, 196, 15, 0.2); }
+        .brand-nav i { font-size: 22px; display: block; margin-bottom: 5px; }
+
+        .container { padding: 15px; min-height: 400px; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 25px; }
+        
+        /* Suratlar üçin ýörite Swiper stili */
+        .swiper { width: 100%; height: 320px; background: #000; display: block; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
-        .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
-        .swiper-pagination-bullet { background: var(--gold) !important; opacity: 0.6; }
-        .swiper-pagination-bullet-active { opacity: 1; }
-        .info { padding: 20px; text-align: left; }
-        .specs { color: #888; font-size: 14px; margin: 5px 0; }
+        .swiper-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        .info { padding: 20px; }
+        .specs { color: #888; font-size: 14px; margin: 8px 0; }
         .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
         .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
+        
+        .empty-state { text-align: center; padding: 50px; color: #444; }
+        .empty-state i { font-size: 40px; margin-bottom: 15px; }
+
         #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
@@ -47,67 +54,62 @@
     </div>
     
     <header>
-        <h1 id="main-title">Kargo Telefon</h1>
-        <p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p>
-        <p id="welcome-msg" style="color:#f1c40f; font-size: 14px; padding: 10px 20px; line-height: 1.4;">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
+        <h1 id="main-title">Kargo Mobile</h1>
+        <p id="welcome-msg" class="welcome-msg">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
     </header>
 
     <div class="brand-nav">
-        <button onclick="setFilter('all', this)"><i class="fa-solid fa-list"></i><span class="t-all">Ählisi</span></button>
+        <button onclick="setFilter('all', this)"><i class="fa-solid fa-border-all"></i><span class="t-all">Ählisi</span></button>
         <button onclick="setFilter('iPhone', this)"><i class="fa-brands fa-apple"></i><span>iPhone</span></button>
-        <button onclick="setFilter('Samsung', this)"><i class="fa-solid fa-mobile-screen"></i><span>Samsung</span></button>
+        <button onclick="setFilter('Samsung', this)"><i class="fa-solid fa-mobile-screen-button"></i><span>Samsung</span></button>
         <button onclick="setFilter('Infinix', this)"><i class="fa-solid fa-bolt"></i><span>Infinix</span></button>
     </div>
 
     <div class="container" id="product-list">
-        <p id="select-prompt" style="text-align:center; color:#555; margin-top:50px;">Görmek isleýän modeliňizi ýokardan saýlaň</p>
+        <div class="empty-state">
+            <i class="fa-solid fa-hand-pointer"></i>
+            <p id="start-msg">Görmek isleýän modeliňizi ýokardan saýlaň</p>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
         let allProducts = [];
-        let currentFilter = 'none'; // Başlangyçda hiç zat görkezmeýär
+        let activeFilter = 'none';
 
         const trans = {
-            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!", welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", prompt: "Görmek isleýän modeliňizi ýokardan saýlaň", all: "Ählisi" },
-            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!", welcome: "Kargo Mobile hizmetinizde. Hızlı teslimat ve uygun fiyatlar!", prompt: "Lütfen yukarıdan bir model seçiniz", all: "Hepsi" },
-            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!", welcome: "Kargo Mobile к вашим услугам. Быстрая доставка по лучшим ценам!", prompt: "Пожалуйста, выберите модель выше", all: "Все" },
-            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!", welcome: "Kargo Mobile at your service. Fast delivery and best prices!", prompt: "Please select a model above", all: "All" }
+            tm: { buy: "Sargyt Et", off: "Internet ýok!", welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", start: "Görmek isleýän modeliňizi ýokardan saýlaň", all: "Ählisi" },
+            tr: { buy: "Sipariş Ver", off: "İnternet yok!", welcome: "Kargo Mobile hizmetinizde. Hızlı ve uygun telefonlar!", start: "Model seçmek için yukarıya tıklayın", all: "Hepsi" },
+            ru: { buy: "Заказать", off: "Нет интернета!", welcome: "Kargo Mobile к вашим услугам. Быстрая доставка телефонов!", start: "Выберите модель сверху", all: "Все" },
+            en: { buy: "Order Now", off: "No Internet!", welcome: "Kargo Mobile at your service. Fast and cheap delivery!", start: "Select a model from above", all: "All" }
         };
 
         async function loadProducts() {
             try {
-                const response = await fetch('products.json?v=' + new Date().getTime());
+                const response = await fetch('products.json?v=' + Date.now());
                 allProducts = await response.json();
-                // Ilki bilen harytlary görkezmeýäris
-            } catch (e) { console.log("Harytlar ýüklenmedi: ", e); }
+            } catch (e) { console.error("JSON yuklenmedi"); }
         }
 
-        // Täze goşulan filter funksiýasy
         function setFilter(brand, btn) {
-            currentFilter = brand;
+            activeFilter = brand;
             document.querySelectorAll('.brand-nav button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            displayProducts();
+            render();
         }
 
-        function displayProducts() {
+        function render() {
             const list = document.getElementById('product-list');
             list.innerHTML = '';
 
-            if (currentFilter === 'none') {
-                list.innerHTML = `<p style="text-align:center; color:#555; margin-top:50px;">${trans[currentLang].prompt}</p>`;
-                return;
-            }
-
             const filtered = allProducts.filter(p => {
-                if (currentFilter === 'all') return true;
-                return p.name.toLowerCase().includes(currentFilter.toLowerCase());
+                if (activeFilter === 'all') return true;
+                return p.name.toLowerCase().includes(activeFilter.toLowerCase());
             });
 
             filtered.forEach((p, index) => {
-                let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}" onerror="this.src='https://via.placeholder.com/300?text=Surat+Tapylmady'"></div>`).join('');
+                const slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}" onerror="this.src='https://via.placeholder.com/300x400?text=Surat+Tapylmady'"></div>`).join('');
                 
                 list.innerHTML += `
                     <div class="card">
@@ -124,25 +126,29 @@
                     </div>`;
             });
 
-            // Seniň original Swiper kodyň
-            filtered.forEach((p, index) => {
-                new Swiper(`.mySwiper-${index}`, {
-                    pagination: { el: ".swiper-pagination", clickable: true },
-                    observer: true,
-                    observeParents: true
+            // SURATLARYŇ AÇYLMAGY ÜÇIN IŇ MÖHÜM BÖLEK:
+            setTimeout(() => {
+                filtered.forEach((_, index) => {
+                    new Swiper(`.mySwiper-${index}`, {
+                        pagination: { el: ".swiper-pagination", clickable: true },
+                        observer: true,
+                        observeParents: true,
+                        watchOverflow: true,
+                        init: true
+                    });
                 });
-            });
+            }, 100); // 100ms garaşmak suratlaryň we Swiper-iň dogry birleşmegini üpjün edýär.
         }
 
         function changeLang(l) {
             currentLang = l;
-            document.getElementById('sub-title').innerText = trans[l].sub;
-            document.getElementById('off-text').innerText = trans[l].off;
             document.getElementById('welcome-msg').innerText = trans[l].welcome;
+            document.getElementById('off-text').innerText = trans[l].off;
+            if(document.getElementById('start-msg')) document.getElementById('start-msg').innerText = trans[l].start;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
             document.querySelector('.t-all').innerText = trans[l].all;
-            displayProducts();
+            if(activeFilter !== 'none') render();
         }
 
         window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
