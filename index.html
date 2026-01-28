@@ -13,36 +13,26 @@
         .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
         .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
         .lang-bar button.active { background: var(--gold); color: #000; }
+        header { padding: 20px; text-align: center; }
+        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
         
-        /* Professional Header ve Yazgy */
-        header { padding: 25px 20px; text-align: center; }
-        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 26px; letter-spacing: 1px; }
-        .welcome-text { color: #f1c40f; font-size: 15px; margin-top: 15px; padding: 0 10px; line-height: 1.5; font-weight: 500; }
+        /* Täze goşulan marka düwmeleri stili */
+        .brand-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 10px; }
+        .brand-nav button { background: #222; border: 1px solid #444; color: #fff; padding: 10px 15px; border-radius: 12px; cursor: pointer; font-size: 14px; display: flex; flex-direction: column; align-items: center; min-width: 70px; }
+        .brand-nav button.active { border-color: var(--gold); color: var(--gold); }
+        .brand-nav i { font-size: 20px; margin-bottom: 5px; }
 
-        /* Professional Marka Grid */
-        .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 15px; max-width: 600px; margin: 0 auto; }
-        .brand-btn { background: var(--card-bg); border: 1px solid #333; border-radius: 18px; padding: 15px 5px; cursor: pointer; text-align: center; color: #888; transition: 0.3s; }
-        .brand-btn i { font-size: 26px; display: block; margin-bottom: 8px; }
-        .brand-btn span { font-size: 12px; font-weight: 600; text-transform: uppercase; }
-        .brand-btn.active { border-color: var(--gold); color: var(--gold); background: #252525; }
-
-        .container { padding: 15px; min-height: 400px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .swiper { width: 100%; height: 320px; background: #000; }
+        .container { padding: 15px; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
+        .swiper { width: 100%; height: 300px; background: #000; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
-        .swiper-pagination-bullet { background: var(--gold) !important; }
-        
+        .swiper-pagination-bullet { background: var(--gold) !important; opacity: 0.6; }
+        .swiper-pagination-bullet-active { opacity: 1; }
         .info { padding: 20px; text-align: left; }
-        .info h3 { margin: 0; font-size: 20px; color: #fff; }
-        .specs { color: #888; font-size: 14px; margin: 8px 0; }
-        .price { font-size: 24px; color: var(--gold); font-weight: bold; margin: 15px 0; }
-        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 16px; text-decoration: none; border-radius: 14px; font-weight: bold; font-size: 16px; }
-        
-        /* Baslangyc xabar */
-        .start-notice { text-align: center; padding: 60px 20px; color: #555; }
-        .start-notice i { font-size: 40px; margin-bottom: 15px; display: block; }
-
+        .specs { color: #888; font-size: 14px; margin: 5px 0; }
+        .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
+        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
         #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
@@ -55,67 +45,70 @@
         <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
         <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
     </div>
-
+    
     <header>
-        <h1 id="main-title">Kargo Mobile</h1>
-        <p id="welcome-msg" class="welcome-text">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
+        <h1 id="main-title">Kargo Telefon</h1>
+        <p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p>
+        <p id="welcome-msg" style="color:#f1c40f; font-size: 14px; padding: 10px 20px; line-height: 1.4;">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
     </header>
 
-    <div class="brand-grid">
-        <div class="brand-btn" onclick="filterBrand('all', this)"><i class="fa-solid fa-layer-group"></i><span class="b-txt" data-key="all">Ählisi</span></div>
-        <div class="brand-btn" onclick="filterBrand('iPhone', this)"><i class="fa-brands fa-apple"></i><span>iPhone</span></div>
-        <div class="brand-btn" onclick="filterBrand('Samsung', this)"><i class="fa-solid fa-mobile-screen"></i><span>Samsung</span></div>
-        <div class="brand-btn" onclick="filterBrand('Infinix', this)"><i class="fa-solid fa-bolt"></i><span>Infinix</span></div>
-        <div class="brand-btn" onclick="filterBrand('Xiaomi', this)"><i class="fa-solid fa-chip"></i><span>Xiaomi</span></div>
-        <div class="brand-btn" onclick="filterBrand('Amatly', this)"><i class="fa-solid fa-tags"></i><span class="b-txt" data-key="cheap">Amatly</span></div>
+    <div class="brand-nav">
+        <button onclick="setFilter('all', this)"><i class="fa-solid fa-list"></i><span class="t-all">Ählisi</span></button>
+        <button onclick="setFilter('iPhone', this)"><i class="fa-brands fa-apple"></i><span>iPhone</span></button>
+        <button onclick="setFilter('Samsung', this)"><i class="fa-solid fa-mobile-screen"></i><span>Samsung</span></button>
+        <button onclick="setFilter('Infinix', this)"><i class="fa-solid fa-bolt"></i><span>Infinix</span></button>
     </div>
 
     <div class="container" id="product-list">
-        <div class="start-notice">
-            <i class="fa-solid fa-hand-pointer"></i>
-            <p id="start-msg">Görmek isleýän modeliňizi ýokardan saýlaň</p>
-        </div>
+        <p id="select-prompt" style="text-align:center; color:#555; margin-top:50px;">Görmek isleýän modeliňizi ýokardan saýlaň</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
-        let currentBrand = 'none';
         let allProducts = [];
+        let currentFilter = 'none'; // Başlangyçda hiç zat görkezmeýär
 
         const trans = {
-            tm: { welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", start: "Görmek isleýän modeliňizi ýokardan saýlaň", buy: "Sargyt Et", off: "Internet ýok!", all: "Ählisi", cheap: "Amatly" },
-            tr: { welcome: "Kargo Mobile Hizmetinizde. Telefonlar uygun fiyatlı ve hızlı teslimat hizmeti bizde!", start: "Görmek istediğiniz modeli yukarıdan seçiniz", buy: "Sipariş Ver", off: "İnternet yok!", all: "Hepsi", cheap: "Uygun" },
-            ru: { welcome: "Kargo Mobile к вашим услугам. У нас доступные цены и быстрая доставка!", start: "Выберите интересующую модель выше", buy: "Заказать", off: "Нет интернета!", all: "Все", cheap: "Выгодно" },
-            en: { welcome: "Kargo Mobile at your service. Affordable prices and fast delivery!", start: "Please select a model above", buy: "Order Now", off: "No Internet!", all: "All", cheap: "Deals" }
+            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!", welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", prompt: "Görmek isleýän modeliňizi ýokardan saýlaň", all: "Ählisi" },
+            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!", welcome: "Kargo Mobile hizmetinizde. Hızlı teslimat ve uygun fiyatlar!", prompt: "Lütfen yukarıdan bir model seçiniz", all: "Hepsi" },
+            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!", welcome: "Kargo Mobile к вашим услугам. Быстрая доставка по лучшим ценам!", prompt: "Пожалуйста, выберите модель выше", all: "Все" },
+            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!", welcome: "Kargo Mobile at your service. Fast delivery and best prices!", prompt: "Please select a model above", all: "All" }
         };
 
         async function loadProducts() {
             try {
                 const response = await fetch('products.json?v=' + new Date().getTime());
                 allProducts = await response.json();
-            } catch (e) { console.error("Harytlar yuklenmedi"); }
+                // Ilki bilen harytlary görkezmeýäris
+            } catch (e) { console.log("Harytlar ýüklenmedi: ", e); }
         }
 
-        function filterBrand(brand, el) {
-            currentBrand = brand;
-            document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-            render();
+        // Täze goşulan filter funksiýasy
+        function setFilter(brand, btn) {
+            currentFilter = brand;
+            document.querySelectorAll('.brand-nav button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            displayProducts();
         }
 
-        function render() {
+        function displayProducts() {
             const list = document.getElementById('product-list');
             list.innerHTML = '';
 
+            if (currentFilter === 'none') {
+                list.innerHTML = `<p style="text-align:center; color:#555; margin-top:50px;">${trans[currentLang].prompt}</p>`;
+                return;
+            }
+
             const filtered = allProducts.filter(p => {
-                if (currentBrand === 'all') return true;
-                if (currentBrand === 'Amatly') return parseInt(p.price) < 200 || p.name.includes("A07");
-                return p.name.toLowerCase().includes(currentBrand.toLowerCase());
+                if (currentFilter === 'all') return true;
+                return p.name.toLowerCase().includes(currentFilter.toLowerCase());
             });
 
             filtered.forEach((p, index) => {
                 let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}" onerror="this.src='https://via.placeholder.com/300?text=Surat+Tapylmady'"></div>`).join('');
+                
                 list.innerHTML += `
                     <div class="card">
                         <div class="swiper mySwiper-${index}">
@@ -131,31 +124,25 @@
                     </div>`;
             });
 
-            // Swiper-lary harytlar dorenden son işledýäris
+            // Seniň original Swiper kodyň
             filtered.forEach((p, index) => {
                 new Swiper(`.mySwiper-${index}`, {
                     pagination: { el: ".swiper-pagination", clickable: true },
                     observer: true,
-                    observeParents: true,
-                    loop: false
+                    observeParents: true
                 });
             });
         }
 
         function changeLang(l) {
             currentLang = l;
-            document.getElementById('welcome-msg').innerText = trans[l].welcome;
+            document.getElementById('sub-title').innerText = trans[l].sub;
             document.getElementById('off-text').innerText = trans[l].off;
-            if(document.getElementById('start-msg')) document.getElementById('start-msg').innerText = trans[l].start;
-            
-            document.querySelectorAll('.b-txt').forEach(span => {
-                const key = span.getAttribute('data-key');
-                span.innerText = trans[l][key];
-            });
-
+            document.getElementById('welcome-msg').innerText = trans[l].welcome;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
-            if(currentBrand !== 'none') render();
+            document.querySelector('.t-all').innerText = trans[l].all;
+            displayProducts();
         }
 
         window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
