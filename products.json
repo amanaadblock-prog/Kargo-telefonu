@@ -2,7 +2,7 @@
   {
     "name": "iPhone 17 Pro",
     "specs": "256GB | Silver | 1 SIM | Aktiv",
-    "price": "1,750$ (79,625 TL)",
+    "price": "1,300$ (59,150 TL)",
     "images": [
       "shopping.webp",
       "surat2.webp",
@@ -16,7 +16,7 @@
   {
     "name": "iPhone 17 Pro Max",
     "specs": "256GB | Blue | 1 SIM | Täze",
-    "price": "1,900$ (86,450 TL)",
+    "price": "1,405$ (63,927 TL)",
     "images": [
       "max1.jpg",
       "max2.jpg",
@@ -27,7 +27,7 @@
   {
     "name": "iPhone 17 Pro Orange",
     "specs": "256GB | Orange | 1 SIM | Täze",
-    "price": "1,750$ (79,625 TL)",
+    "price": "1,300$ (59,150 TL)",
     "images": [
       "orange1.jpg",
       "orange2.jpg",
@@ -38,7 +38,7 @@
   {
     "name": "Samsung S24",
     "specs": "Black | Täze | Iki görnüşli ýat",
-    "price": "8/128GB: 570$ (25,935 TL) <br> 8/256GB: 770$ (35,035 TL)",
+    "price": "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)",
     "images": [
       "s24_1.jpg",
       "s24_2.jpg",
@@ -48,7 +48,7 @@
   {
     "name": "Samsung S25 Ultra",
     "specs": "12/256GB | Gray, Blue, Black | Täze",
-    "price": "1,000$ (45,500 TL)",
+    "price": "920$ (41,860 TL)",
     "images": [
       "s25u_1.jpg",
       "s25u_2.jpg",
@@ -57,9 +57,20 @@
     ]
   },
   {
+    "name": "Infinix GT 30 Pro",
+    "specs": "12/256GB | Gaming Edition | 5G | Täze",
+    "price": "325$ (14,787 TL)",
+    "images": [
+      "gt30_1.jpg",
+      "gt30_2.jpg",
+      "gt30_3.jpg",
+      "gt30_4.jpg"
+    ]
+  },
+  {
     "name": "Samsung A26",
     "specs": "6/128GB | Täze | Netijeli Model",
-    "price": "240$ (10,920 TL)",
+    "price": "215$ (9,782 TL)",
     "images": [
       "a26_1.jpg",
       "a26_2.jpg",
@@ -70,7 +81,7 @@
   {
     "name": "Samsung A17",
     "specs": "Täze | Iki görnüşli ýat",
-    "price": "4/128GB: 200$ (9,100 TL) <br> 6/128GB: 250$ (11,375 TL)",
+    "price": "4/128GB: 173$ (7,871 TL) <br> 6/128GB: 185$ (8,417 TL)",
     "images": [
       "a17_1.jpg",
       "a17_2.jpg",
@@ -81,7 +92,7 @@
   {
     "name": "Samsung A16",
     "specs": "8/256GB | Täze | Gara, Ýaşyl, Çüýşebendi",
-    "price": "275$ (12,512 TL)",
+    "price": "200$ (9,100 TL)",
     "images": [
       "a16_1.jpg",
       "a16_2.jpg",
@@ -94,7 +105,7 @@
   {
     "name": "Samsung A07",
     "specs": "4/64GB | Täze | Amatly baha",
-    "price": "90$ (4,095 TL)",
+    "price": "162$ (7,371 TL)",
     "images": [
       "a07_1.jpg",
       "a07_2.jpg",
