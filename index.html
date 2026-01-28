@@ -14,26 +14,35 @@
         .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
         .lang-bar button.active { background: var(--gold); color: #000; }
         
-        header { padding: 20px; text-align: center; }
-        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
-        
-        /* Marka Bar */
-        .brand-bar { display: flex; justify-content: center; gap: 15px; padding: 10px; flex-wrap: wrap; }
-        .brand-btn { background: #222; border: 1px solid #444; color: #fff; padding: 10px; border-radius: 12px; cursor: pointer; min-width: 60px; text-align: center; }
-        .brand-btn.active { border-color: var(--gold); color: var(--gold); }
-        .brand-btn i { font-size: 20px; display: block; margin-bottom: 5px; }
+        /* Professional Header ve Yazgy */
+        header { padding: 25px 20px; text-align: center; }
+        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 26px; letter-spacing: 1px; }
+        .welcome-text { color: #f1c40f; font-size: 15px; margin-top: 15px; padding: 0 10px; line-height: 1.5; font-weight: 500; }
 
-        .container { padding: 15px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
-        .swiper { width: 100%; height: 300px; background: #000; }
+        /* Professional Marka Grid */
+        .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 15px; max-width: 600px; margin: 0 auto; }
+        .brand-btn { background: var(--card-bg); border: 1px solid #333; border-radius: 18px; padding: 15px 5px; cursor: pointer; text-align: center; color: #888; transition: 0.3s; }
+        .brand-btn i { font-size: 26px; display: block; margin-bottom: 8px; }
+        .brand-btn span { font-size: 12px; font-weight: 600; text-transform: uppercase; }
+        .brand-btn.active { border-color: var(--gold); color: var(--gold); background: #252525; }
+
+        .container { padding: 15px; min-height: 400px; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .swiper { width: 100%; height: 320px; background: #000; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
-        .swiper-pagination-bullet { background: var(--gold) !important; opacity: 0.6; }
-        .swiper-pagination-bullet-active { opacity: 1; }
+        .swiper-pagination-bullet { background: var(--gold) !important; }
+        
         .info { padding: 20px; text-align: left; }
-        .specs { color: #888; font-size: 14px; margin: 5px 0; }
-        .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
-        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
+        .info h3 { margin: 0; font-size: 20px; color: #fff; }
+        .specs { color: #888; font-size: 14px; margin: 8px 0; }
+        .price { font-size: 24px; color: var(--gold); font-weight: bold; margin: 15px 0; }
+        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 16px; text-decoration: none; border-radius: 14px; font-weight: bold; font-size: 16px; }
+        
+        /* Baslangyc xabar */
+        .start-notice { text-align: center; padding: 60px 20px; color: #555; }
+        .start-notice i { font-size: 40px; margin-bottom: 15px; display: block; }
+
         #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
@@ -46,49 +55,52 @@
         <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
         <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
     </div>
-    
+
     <header>
         <h1 id="main-title">Kargo Mobile</h1>
-        <p id="sub-title" style="color:#888; padding: 10px;">Amatly we Çalt Eltip Bermek</p>
-        <p id="welcome-msg" style="color:#f1c40f; font-size: 14px; padding: 0 20px;">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
+        <p id="welcome-msg" class="welcome-text">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
     </header>
 
-    <div class="brand-bar">
-        <button class="brand-btn" onclick="filterBy('all', this)"><i>📱</i><span class="b-txt" data-key="all">Ählisi</span></button>
-        <button class="brand-btn" onclick="filterBy('iPhone', this)"><i>🍎</i><span>iPhone</span></button>
-        <button class="brand-btn" onclick="filterBy('Samsung', this)"><i>🔹</i><span>Samsung</span></button>
-        <button class="brand-btn" onclick="filterBy('Infinix', this)"><i>⚡</i><span>Infinix</span></button>
+    <div class="brand-grid">
+        <div class="brand-btn" onclick="filterBrand('all', this)"><i class="fa-solid fa-layer-group"></i><span class="b-txt" data-key="all">Ählisi</span></div>
+        <div class="brand-btn" onclick="filterBrand('iPhone', this)"><i class="fa-brands fa-apple"></i><span>iPhone</span></div>
+        <div class="brand-btn" onclick="filterBrand('Samsung', this)"><i class="fa-solid fa-mobile-screen"></i><span>Samsung</span></div>
+        <div class="brand-btn" onclick="filterBrand('Infinix', this)"><i class="fa-solid fa-bolt"></i><span>Infinix</span></div>
+        <div class="brand-btn" onclick="filterBrand('Xiaomi', this)"><i class="fa-solid fa-chip"></i><span>Xiaomi</span></div>
+        <div class="brand-btn" onclick="filterBrand('Amatly', this)"><i class="fa-solid fa-tags"></i><span class="b-txt" data-key="cheap">Amatly</span></div>
     </div>
 
     <div class="container" id="product-list">
-        <p id="start-msg" style="text-align:center; color:#555; margin-top:50px;">Görmek isleýän modeliňizi ýokardan saýlaň</p>
+        <div class="start-notice">
+            <i class="fa-solid fa-hand-pointer"></i>
+            <p id="start-msg">Görmek isleýän modeliňizi ýokardan saýlaň</p>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
+        let currentBrand = 'none';
         let allProducts = [];
-        let selectedBrand = 'none';
 
         const trans = {
-            tm: { sub: "Amatly we Çalt Eltip Bermek", welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", start: "Görmek isleýän modeliňizi ýokardan saýlaň", buy: "Sargyt Et", off: "Internet ýok!", all: "Ählisi" },
-            tr: { sub: "Hızlı ve Uygun Teslimat", welcome: "Kargo Mobile Hizmetinizde. Telefonlar uygun fiyatlı ve hızlı teslimat hizmeti bizde!", start: "Görmek istediğiniz modeli yukarıdan seçiniz", buy: "Sipariş Ver", off: "İnternet yok!", all: "Hepsi" },
-            ru: { sub: "Быстрая доставка", welcome: "Kargo Mobile к вашим услугам. У нас доступные цены и быстрая доставка телефонов!", start: "Выберите интересующую модель выше", buy: "Заказать", off: "Нет интернета!", all: "Все" },
-            en: { sub: "Fast Delivery", welcome: "Kargo Mobile at your service. Affordable prices and fast delivery!", start: "Please select a model above", buy: "Order Now", off: "No Internet!", all: "All" }
+            tm: { welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", start: "Görmek isleýän modeliňizi ýokardan saýlaň", buy: "Sargyt Et", off: "Internet ýok!", all: "Ählisi", cheap: "Amatly" },
+            tr: { welcome: "Kargo Mobile Hizmetinizde. Telefonlar uygun fiyatlı ve hızlı teslimat hizmeti bizde!", start: "Görmek istediğiniz modeli yukarıdan seçiniz", buy: "Sipariş Ver", off: "İnternet yok!", all: "Hepsi", cheap: "Uygun" },
+            ru: { welcome: "Kargo Mobile к вашим услугам. У нас доступные цены и быстрая доставка!", start: "Выберите интересующую модель выше", buy: "Заказать", off: "Нет интернета!", all: "Все", cheap: "Выгодно" },
+            en: { welcome: "Kargo Mobile at your service. Affordable prices and fast delivery!", start: "Please select a model above", buy: "Order Now", off: "No Internet!", all: "All", cheap: "Deals" }
         };
 
         async function loadProducts() {
             try {
                 const response = await fetch('products.json?v=' + new Date().getTime());
                 allProducts = await response.json();
-                // Ilki bilen hiç zat görkezmeýär (selectedBrand = 'none')
-            } catch (e) { console.log(e); }
+            } catch (e) { console.error("Harytlar yuklenmedi"); }
         }
 
-        function filterBy(brand, el) {
-            selectedBrand = brand;
+        function filterBrand(brand, el) {
+            currentBrand = brand;
             document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
-            if(el) el.classList.add('active');
+            el.classList.add('active');
             render();
         }
 
@@ -96,44 +108,54 @@
             const list = document.getElementById('product-list');
             list.innerHTML = '';
 
-            if (selectedBrand === 'none') {
-                list.innerHTML = `<p style="text-align:center; color:#555; margin-top:50px;">${trans[currentLang].start}</p>`;
-                return;
-            }
-
             const filtered = allProducts.filter(p => {
-                if (selectedBrand === 'all') return true;
-                return p.name.toLowerCase().includes(selectedBrand.toLowerCase());
+                if (currentBrand === 'all') return true;
+                if (currentBrand === 'Amatly') return parseInt(p.price) < 200 || p.name.includes("A07");
+                return p.name.toLowerCase().includes(currentBrand.toLowerCase());
             });
 
             filtered.forEach((p, index) => {
-                let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}"></div>`).join('');
+                let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}" onerror="this.src='https://via.placeholder.com/300?text=Surat+Tapylmady'"></div>`).join('');
                 list.innerHTML += `
                     <div class="card">
-                        <div class="swiper mySwiper-${index}"><div class="swiper-wrapper">${slides}</div><div class="swiper-pagination"></div></div>
+                        <div class="swiper mySwiper-${index}">
+                            <div class="swiper-wrapper">${slides}</div>
+                            <div class="swiper-pagination"></div>
+                        </div>
                         <div class="info">
                             <h3>${p.name}</h3>
                             <div class="specs">${p.specs}</div>
                             <p class="price">${p.price}</p>
-                            <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
+                            <a href="https://wa.me/99364041065?text=Salam, men ${p.name} sargyt etmek isleýärin." class="buy-btn">${trans[currentLang].buy}</a>
                         </div>
                     </div>`;
             });
 
+            // Swiper-lary harytlar dorenden son işledýäris
             filtered.forEach((p, index) => {
-                new Swiper(`.mySwiper-${index}`, { pagination: { el: ".swiper-pagination", clickable: true }, observer: true, observeParents: true });
+                new Swiper(`.mySwiper-${index}`, {
+                    pagination: { el: ".swiper-pagination", clickable: true },
+                    observer: true,
+                    observeParents: true,
+                    loop: false
+                });
             });
         }
 
         function changeLang(l) {
             currentLang = l;
-            document.getElementById('sub-title').innerText = trans[l].sub;
             document.getElementById('welcome-msg').innerText = trans[l].welcome;
             document.getElementById('off-text').innerText = trans[l].off;
+            if(document.getElementById('start-msg')) document.getElementById('start-msg').innerText = trans[l].start;
+            
+            document.querySelectorAll('.b-txt').forEach(span => {
+                const key = span.getAttribute('data-key');
+                span.innerText = trans[l][key];
+            });
+
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
-            document.querySelector('.b-txt').innerText = trans[l].all;
-            render();
+            if(currentBrand !== 'none') render();
         }
 
         window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
