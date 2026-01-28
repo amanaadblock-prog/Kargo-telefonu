@@ -1,116 +1,176 @@
-[
-  {
-    "name": "iPhone 17 Pro",
-    "specs": "256GB | Silver | 1 SIM | Aktiv",
-    "price": "1,300$ (59,150 TL)",
-    "images": [
-      "shopping.webp",
-      "surat2.webp",
-      "surat3.webp",
-      "surat4.webp",
-      "surat5.webp",
-      "surat6.webp",
-      "surat7.webp"
-    ]
-  },
-  {
-    "name": "iPhone 17 Pro Max",
-    "specs": "256GB | Blue | 1 SIM | Täze",
-    "price": "1,405$ (63,927 TL)",
-    "images": [
-      "max1.jpg",
-      "max2.jpg",
-      "max3.jpg",
-      "max4.jpg"
-    ]
-  },
-  {
-    "name": "iPhone 17 Pro Orange",
-    "specs": "256GB | Orange | 1 SIM | Täze",
-    "price": "1,300$ (59,150 TL)",
-    "images": [
-      "orange1.jpg",
-      "orange2.jpg",
-      "orange3.jpg",
-      "orange4.jpg"
-    ]
-  },
-  {
-    "name": "Samsung S24",
-    "specs": "Black | Täze | Iki görnüşli ýat",
-    "price": "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)",
-    "images": [
-      "s24_1.jpg",
-      "s24_2.jpg",
-      "s24_3.jpg"
-    ]
-  },
-  {
-    "name": "Samsung S25 Ultra",
-    "specs": "12/256GB | Gray, Blue, Black | Täze",
-    "price": "920$ (41,860 TL)",
-    "images": [
-      "s25u_1.jpg",
-      "s25u_2.jpg",
-      "s25u_3.jpg",
-      "s25u_4.jpg"
-    ]
-  },
-  {
-    "name": "Infinix GT 30 Pro",
-    "specs": "12/256GB | Gaming Edition | 5G | Täze",
-    "price": "325$ (14,787 TL)",
-    "images": [
-      "gt30_1.jpg",
-      "gt30_2.jpg",
-      "gt30_3.jpg",
-      "gt30_4.jpg"
-    ]
-  },
-  {
-    "name": "Samsung A26",
-    "specs": "6/128GB | Täze | Netijeli Model",
-    "price": "215$ (9,782 TL)",
-    "images": [
-      "a26_1.jpg",
-      "a26_2.jpg",
-      "a26_3.jpg",
-      "a26_4.jpg"
-    ]
-  },
-  {
-    "name": "Samsung A17",
-    "specs": "Täze | Iki görnüşli ýat",
-    "price": "4/128GB: 173$ (7,871 TL) <br> 6/128GB: 185$ (8,417 TL)",
-    "images": [
-      "a17_1.jpg",
-      "a17_2.jpg",
-      "a17_3.jpg",
-      "a17_4.jpg"
-    ]
-  },
-  {
-    "name": "Samsung A16",
-    "specs": "8/256GB | Täze | Gara, Ýaşyl, Çüýşebendi",
-    "price": "200$ (9,100 TL)",
-    "images": [
-      "a16_1.jpg",
-      "a16_2.jpg",
-      "a16_3.jpg",
-      "a16_4.jpg",
-      "a16_5.jpg",
-      "a16_6.jpg"
-    ]
-  },
-  {
-    "name": "Samsung A07",
-    "specs": "4/64GB | Täze | Amatly baha",
-    "price": "162$ (7,371 TL)",
-    "images": [
-      "a07_1.jpg",
-      "a07_2.jpg",
-      "a07_3.jpg",
-      "a07_4.jpg"
-    ]
-  }
-]
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kargo Mobile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        :root { --gold: #f1c40f; --dark-bg: #121212; --card-bg: #1e1e1e; --text-white: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding: 0; }
+        .safe-area { height: 40px; background: #000; }
+        .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
+        .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+        .lang-bar button.active { background: var(--gold); color: #000; }
+        
+        /* Garşylama Bölümi */
+        .welcome-box { padding: 30px 20px; text-align: center; background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%); }
+        .welcome-box h1 { color: var(--gold); margin-bottom: 10px; font-size: 28px; }
+        .welcome-box p { color: #ccc; line-height: 1.6; font-size: 16px; max-width: 400px; margin: 0 auto; }
+
+        .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; max-width: 600px; margin: 0 auto; }
+        .brand-btn { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 15px 5px; cursor: pointer; text-align: center; transition: 0.3s; color: #888; }
+        .brand-btn i { font-size: 28px; display: block; margin-bottom: 8px; }
+        .brand-btn span { font-size: 11px; font-weight: 600; text-transform: uppercase; }
+        .brand-btn.active { border-color: var(--gold); color: var(--gold); background: #252525; box-shadow: 0 0 15px rgba(241, 196, 15, 0.2); }
+
+        .container { padding: 15px; min-height: 300px; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
+        .swiper { width: 100%; height: 300px; background: #000; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
+        .info { padding: 20px; }
+        .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
+        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
+        
+        /* Model saýlanmadyk wagty çykýan ýazgy */
+        .empty-state { text-align: center; padding: 50px 20px; color: #555; }
+        .empty-state i { font-size: 50px; margin-bottom: 15px; opacity: 0.3; }
+
+        #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div id="offline-warning"><h1>⚠️</h1><h2 id="off-text">Internet ýok</h2></div>
+    <div class="safe-area"></div>
+    
+    <div class="lang-bar">
+        <button onclick="changeLang('tm')" id="btn-tm" class="active">🇹🇲 TM</button>
+        <button onclick="changeLang('tr')" id="btn-tr">🇹🇷 TR</button>
+        <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
+        <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
+    </div>
+
+    <div class="welcome-box">
+        <h1 id="main-title">Kargo Mobile</h1>
+        <p id="welcome-text">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
+    </div>
+
+    <div class="brand-grid">
+        <div class="brand-btn" onclick="filterBrand('all', this)"><i class="fa-solid fa-layer-group"></i><span class="b-txt" data-key="all">Ählisi</span></div>
+        <div class="brand-btn" onclick="filterBrand('iPhone', this)"><i class="fa-brands fa-apple"></i><span class="b-txt" data-key="apple">iPhone</span></div>
+        <div class="brand-btn" onclick="filterBrand('Samsung', this)"><i class="fa-solid fa-mobile-screen-button"></i><span class="b-txt" data-key="samsung">Samsung</span></div>
+        <div class="brand-btn" onclick="filterBrand('Infinix', this)"><i class="fa-solid fa-bolt"></i><span class="b-txt" data-key="infinix">Infinix</span></div>
+        <div class="brand-btn" onclick="filterBrand('Xiaomi', this)"><i class="fa-solid fa-microchip"></i><span class="b-txt" data-key="xiaomi">Xiaomi</span></div>
+        <div class="brand-btn" onclick="filterBrand('Amatly', this)"><i class="fa-solid fa-tags"></i><span class="b-txt" data-key="cheap">Amatly</span></div>
+    </div>
+
+    <div class="container" id="product-list">
+        <div class="empty-state">
+            <i class="fa-solid fa-arrow-up"></i>
+            <p id="select-text">Görmek isleýän modeliňizi ýokardan saýlaň</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        let currentLang = 'tm';
+        let currentBrand = 'none'; // Başlangyçda hiç zat saýlanmadyk
+        let allProducts = [];
+
+        const trans = {
+            tm: { 
+                welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", 
+                select: "Görmek isleýän modeliňizi ýokardan saýlaň",
+                buy: "Sargyt Et", off: "Internet ýok!", all: "Ählisi", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Amatly" 
+            },
+            tr: { 
+                welcome: "Kargo Mobile Hizmetinizde. Telefonlar uygun fiyatlı ve hızlı teslimat hizmeti bizde!", 
+                select: "Görmek istediğiniz modeli yukarıdan seçiniz",
+                buy: "Sipariş Ver", off: "İnternet yok!", all: "Hepsi", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Uygun" 
+            },
+            ru: { 
+                welcome: "Kargo Mobile к вашим услугам. У нас доступные цены и быстрая доставка телефонов!", 
+                select: "Выберите интересующую модель выше",
+                buy: "Заказать", off: "Нет интернета!", all: "Все", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Выгодно" 
+            },
+            en: { 
+                welcome: "Kargo Mobile at your service. We offer affordable phones and fast delivery!", 
+                select: "Please select a model above to view",
+                buy: "Order Now", off: "No Internet!", all: "All", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Deals" 
+            }
+        };
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('products.json?v=' + new Date().getTime());
+                allProducts = await response.json();
+            } catch (e) { console.log("Harytlar ýüklenmedi"); }
+        }
+
+        function renderProducts() {
+            const list = document.getElementById('product-list');
+            
+            if (currentBrand === 'none') {
+                list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-arrow-up"></i><p id="select-text">${trans[currentLang].select}</p></div>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            const filtered = allProducts.filter(p => {
+                if (currentBrand === 'all') return true;
+                if (currentBrand === 'Amatly') return parseInt(p.price) < 200 || p.name.includes("A07");
+                return p.name.toLowerCase().includes(currentBrand.toLowerCase());
+            });
+
+            filtered.forEach((p, index) => {
+                let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}" onerror="this.src='https://via.placeholder.com/300?text=Surat+Tapylmady'"></div>`).join('');
+                list.innerHTML += `
+                    <div class="card">
+                        <div class="swiper mySwiper-${index}">
+                            <div class="swiper-wrapper">${slides}</div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                        <div class="info">
+                            <h3>${p.name}</h3>
+                            <div style="color:#888; font-size:14px; margin:5px 0;">${p.specs}</div>
+                            <p class="price">${p.price}</p>
+                            <a href="https://wa.me/99364041065?text=Salam, men ${p.name} sargyt etmek isleýärin." class="buy-btn">${trans[currentLang].buy}</a>
+                        </div>
+                    </div>`;
+            });
+
+            filtered.forEach((p, index) => {
+                new Swiper(`.mySwiper-${index}`, { pagination: { el: ".swiper-pagination", clickable: true }, observer: true, observeParents: true });
+            });
+        }
+
+        function filterBrand(brand, el) {
+            currentBrand = brand;
+            document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            renderProducts();
+        }
+
+        function changeLang(l) {
+            currentLang = l;
+            document.getElementById('welcome-text').innerText = trans[l].welcome;
+            if (document.getElementById('select-text')) document.getElementById('select-text').innerText = trans[l].select;
+            document.getElementById('off-text').innerText = trans[l].off;
+            
+            document.querySelectorAll('.b-txt').forEach(span => {
+                const key = span.getAttribute('data-key');
+                span.innerText = trans[l][key];
+            });
+
+            document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + l).classList.add('active');
+            renderProducts();
+        }
+
+        window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
+        window.addEventListener('online', () => document.getElementById('offline-warning').style.display = 'none');
+        loadProducts();
+    </script>
+</body>
+</html>
