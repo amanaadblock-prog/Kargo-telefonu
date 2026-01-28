@@ -11,44 +11,52 @@
         body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding: 0; }
         .safe-area { height: 40px; background: #000; }
         
-        /* Diller we Baydaklar */
-        .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
-        .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-        .lang-bar button.active { background: var(--gold); color: #000; }
-        
-        header { padding: 20px; text-align: center; }
-        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
-        
-        .container { padding: 15px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
-        .swiper { width: 100%; height: 300px; background: #000; }
-        .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
-        .swiper-pagination-bullet { background: var(--gold) !important; opacity: 0.6; }
-        
-        .info { padding: 20px; text-align: left; }
-        .specs { color: #888; font-size: 14px; margin: 5px 0; }
-        .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
-        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
-
-        /* INTERNET ÝOK BOLSA EKRANY ÝAPÝAN SISTEMA */
+        /* Internet Warning Overlay */
         #offline-warning { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: #000; 
-            z-index: 99999; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center;
+            display: none; position: fixed; inset: 0; background: #000; 
+            z-index: 99999; flex-direction: column; align-items: center; 
+            justify-content: center; text-align: center; padding: 20px;
         }
         #offline-warning i { font-size: 80px; color: var(--gold); margin-bottom: 20px; }
+
+        .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
+        .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+        .lang-bar button.active { background: var(--gold); color: #000; }
+        
+        header { padding: 25px 20px; text-align: center; }
+        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 28px; letter-spacing: 2px; }
+
+        /* Marka Ikonkalary */
+        .brand-nav { display: flex; justify-content: center; gap: 20px; padding: 10px 15px 20px; }
+        .brand-item { text-align: center; color: #777; cursor: pointer; transition: 0.3s; min-width: 60px; }
+        .brand-item i { font-size: 30px; display: block; margin-bottom: 5px; }
+        .brand-item span { font-size: 12px; font-weight: bold; }
+        .brand-item.active { color: var(--gold); }
+
+        .container { padding: 15px; }
+        .card { background: var(--card-bg); border-radius: 25px; overflow: hidden; border: 1px solid #333; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .swiper { width: 100%; height: 320px; background: #000; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .info { padding: 20px; }
+        .price { font-size: 24px; color: var(--gold); font-weight: bold; margin: 10px 0; }
+        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 16px; text-decoration: none; border-radius: 15px; font-weight: bold; text-transform: uppercase; }
+
+        /* Medeniýetli Hoşgeldiňiz Bölümi */
+        .welcome-footer { 
+            background: linear-gradient(to bottom, #1e1e1e, #000); 
+            padding: 40px 25px; text-align: center; border-top: 1px solid #333; 
+            margin-top: 20px; border-radius: 30px 30px 0 0;
+        }
+        .welcome-footer h2 { color: var(--gold); font-size: 20px; margin-bottom: 15px; }
+        .welcome-footer p { color: #bbb; font-size: 15px; line-height: 1.8; font-style: italic; max-width: 320px; margin: 0 auto; }
+        .stars { margin-top: 20px; color: var(--gold); font-size: 12px; }
     </style>
 </head>
 <body>
     <div id="offline-warning">
         <i class="fa-solid fa-wifi"></i>
-        <h1 id="off-text" style="color: #fff;">Internet ýok</h1>
+        <h2 id="off-text">Internet ýok</h2>
         <p style="color: #888;">Programmany ulanmak üçin internete birigiň.</p>
     </div>
 
@@ -61,82 +69,127 @@
     </div>
     
     <header>
-        <h1 id="main-title">Kargo Telefon</h1>
-        <p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p>
+        <h1 id="main-title">Kargo Mobile</h1>
     </header>
 
+    <div class="brand-nav">
+        <div class="brand-item active" onclick="setFilter('all', this)">
+            <i class="fa-solid fa-layer-group"></i><span id="t-all">Ählisi</span>
+        </div>
+        <div class="brand-item" onclick="setFilter('iPhone', this)">
+            <i class="fa-brands fa-apple"></i><span>iPhone</span>
+        </div>
+        <div class="brand-item" onclick="setFilter('Samsung', this)">
+            <i class="fa-solid fa-mobile-screen"></i><span>Samsung</span>
+        </div>
+        <div class="brand-item" onclick="setFilter('Infinix', this)">
+            <i class="fa-solid fa-bolt"></i><span>Infinix</span>
+        </div>
+    </div>
+
     <div class="container" id="product-list"></div>
+
+    <div class="welcome-footer">
+        <div style="width: 40px; height: 2px; background: var(--gold); margin: 0 auto 20px;"></div>
+        <h2 id="f-title"></h2>
+        <p id="f-desc"></p>
+        <div class="stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
+        let allProducts = [];
+        let activeFilter = 'all';
+
         const trans = {
-            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!" },
-            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!" },
-            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!" },
-            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!" }
+            tm: { 
+                buy: "Sargyt Et", all: "Ählisi", off: "Internet ýok!",
+                fTitle: "Kargo Mobile — Ynamdar Hyzmat",
+                fDesc: "Kargo Mobile arkaly iň täze modelleri amatly we çalt eltip bermek hyzmaty bilen gapyňyza getirýäris. Siziň hoşallygyňyz biziň baş maksadymyzdyr!"
+            },
+            tr: { 
+                buy: "Sipariş Ver", all: "Hepsi", off: "İnternet yok!",
+                fTitle: "Kargo Mobile — Güvenli Teslimat",
+                fDesc: "En yeni modelleri uygun fiyat ve hızlı teslimat avantajıyla sunuyoruz. Memnuniyetiniz bizim için her şeyden önemlidir."
+            },
+            ru: { 
+                buy: "Заказать", all: "Все", off: "Нет интернета!",
+                fTitle: "Kargo Mobile — Надежный Сервис",
+                fDesc: "Мы доставляем новейшие модели телефонов быстро и по доступным ценам. Ваше доверие — наш главный приоритет!"
+            },
+            en: { 
+                buy: "Order Now", all: "All", off: "No Internet!",
+                fTitle: "Kargo Mobile — Reliable Service",
+                fDesc: "We bring the latest phone models to your door with affordable prices and fast delivery. Your satisfaction is our priority!"
+            }
         };
 
         async function loadProducts() {
             try {
                 const response = await fetch('products.json?v=' + Date.now());
-                const products = await response.json();
-                const list = document.getElementById('product-list');
-                list.innerHTML = '';
-                
-                products.forEach((p, index) => {
-                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
-                    list.innerHTML += `
-                        <div class="card">
-                            <div class="swiper mySwiper-${index}">
-                                <div class="swiper-wrapper">${slides}</div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div class="info">
-                                <h3>${p.name}</h3>
-                                <div class="specs">${p.specs}</div>
-                                <p class="price">${p.price}</p>
-                                <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
-                            </div>
-                        </div>`;
-                });
+                allProducts = await response.json();
+                render();
+            } catch (e) { console.error(e); }
+        }
 
-                setTimeout(() => {
-                    products.forEach((_, index) => {
-                        new Swiper(`.mySwiper-${index}`, {
-                            pagination: { el: ".swiper-pagination", clickable: true },
-                            observer: true,
-                            observeParents: true
-                        });
+        function setFilter(brand, el) {
+            activeFilter = brand;
+            document.querySelectorAll('.brand-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+            render();
+        }
+
+        function render() {
+            const list = document.getElementById('product-list');
+            list.innerHTML = '';
+            const filtered = allProducts.filter(p => activeFilter === 'all' || p.name.includes(activeFilter));
+
+            filtered.forEach((p, i) => {
+                const slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
+                list.innerHTML += `
+                    <div class="card">
+                        <div class="swiper mySwiper-${i}"><div class="swiper-wrapper">${slides}</div><div class="swiper-pagination"></div></div>
+                        <div class="info">
+                            <h3>${p.name}</h3>
+                            <div style="color:#888; font-size:14px;">${p.specs}</div>
+                            <p class="price">${p.price}</p>
+                            <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
+                        </div>
+                    </div>`;
+            });
+
+            setTimeout(() => {
+                filtered.forEach((_, i) => {
+                    new Swiper(`.mySwiper-${i}`, { 
+                        pagination: { el: ".swiper-pagination", clickable: true },
+                        observer: true, observeParents: true 
                     });
-                }, 300);
-            } catch (e) { console.log(e); }
+                });
+            }, 300);
         }
 
         function changeLang(l) {
             currentLang = l;
-            document.getElementById('sub-title').innerText = trans[l].sub;
             document.getElementById('off-text').innerText = trans[l].off;
+            document.getElementById('t-all').innerText = trans[l].all;
+            document.getElementById('f-title').innerText = trans[l].fTitle;
+            document.getElementById('f-desc').innerText = trans[l].fDesc;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
-            
-            // Harytlar ýüklenen bolsa knopkalary terjime et
-            document.querySelectorAll('.buy-btn').forEach(b => b.innerText = trans[l].buy);
+            render();
         }
 
-        // INTERNET KONTROLY
         function checkConnectivity() {
-            if (!navigator.onLine) {
-                document.getElementById('offline-warning').style.display = 'flex';
-            } else {
-                document.getElementById('offline-warning').style.display = 'none';
-            }
+            document.getElementById('offline-warning').style.display = navigator.onLine ? 'none' : 'flex';
         }
 
         window.addEventListener('offline', checkConnectivity);
         window.addEventListener('online', checkConnectivity);
         
-        // Başlangyçda barlag
+        changeLang('tm'); 
         checkConnectivity();
         loadProducts();
     </script>
