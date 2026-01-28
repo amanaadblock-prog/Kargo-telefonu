@@ -1,112 +1,116 @@
-<!DOCTYPE html>
-<html lang="tk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Kargo Telefon</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <style>
-        :root { --gold: #f1c40f; --dark-bg: #121212; --card-bg: #1e1e1e; --text-white: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding: 0; }
-        .safe-area { height: 40px; background: #000; }
-        .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
-        .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-        .lang-bar button.active { background: var(--gold); color: #000; }
-        header { padding: 20px; text-align: center; }
-        header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
-        .container { padding: 15px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
-        .swiper { width: 100%; height: 300px; background: #000; }
-        .swiper-slide { display: flex; align-items: center; justify-content: center; }
-        .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
-        .swiper-pagination-bullet { background: var(--gold) !important; opacity: 0.6; }
-        .info { padding: 20px; text-align: left; }
-        .specs { color: #888; font-size: 14px; margin: 5px 0; }
-        .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
-        .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
-        #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
-    </style>
-</head>
-<body>
-    <div id="offline-warning"><h1>⚠️</h1><h2 id="off-text">Internet ýok</h2></div>
-    <div class="safe-area"></div>
-    <div class="lang-bar">
-        <button onclick="changeLang('tm')" id="btn-tm" class="active">🇹🇲 TM</button>
-        <button onclick="changeLang('tr')" id="btn-tr">🇹🇷 TR</button>
-        <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
-        <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
-    </div>
-    <header>
-        <h1 id="main-title">Kargo Telefon</h1>
-        <p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p>
-    </header>
-    <div class="container" id="product-list"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        let currentLang = 'tm';
-        const trans = {
-            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!" },
-            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!" },
-            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!" },
-            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!" }
-        };
-
-        async function loadProducts() {
-            try {
-                // Suratlaryň gelmegi üçin products.json faýlynyň dogry okalmagy gerek
-                const response = await fetch('products.json?v=' + new Date().getTime());
-                const products = await response.json();
-                const list = document.getElementById('product-list');
-                list.innerHTML = ''; // Köne zatlary pozýarys
-                
-                products.forEach((p, index) => {
-                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
-                    list.innerHTML += `
-                        <div class="card">
-                            <div class="swiper mySwiper-${index}">
-                                <div class="swiper-wrapper">${slides}</div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div class="info">
-                                <h3>${p.name}</h3>
-                                <div class="specs">${p.specs}</div>
-                                <p class="price">${p.price}</p>
-                                <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
-                            </div>
-                        </div>`;
-                });
-
-                // Suratlaryň sürülmegi (Swiper) üçin
-                setTimeout(() => {
-                    products.forEach((p, index) => {
-                        new Swiper(`.mySwiper-${index}`, {
-                            pagination: { el: ".swiper-pagination", clickable: true },
-                            observer: true,
-                            observeParents: true
-                        });
-                    });
-                }, 200);
-            } catch (e) { 
-                console.log("Ýalňyşlyk döräpdir:", e);
-                document.getElementById('product-list').innerHTML = "<p style='text-align:center'>JSON faýlyňyzda ýalňyşlyk bar!</p>";
-            }
-        }
-
-        function changeLang(l) {
-            currentLang = l;
-            document.getElementById('sub-title').innerText = trans[l].sub;
-            document.getElementById('off-text').innerText = trans[l].off;
-            document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + l).classList.add('active');
-            const btns = document.querySelectorAll('.buy-btn');
-            btns.forEach(b => b.innerText = trans[l].buy);
-        }
-
-        window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
-        window.addEventListener('online', () => document.getElementById('offline-warning').style.display = 'none');
-        loadProducts();
-    </script>
-</body>
-</html>
+[
+  {
+    "name": "iPhone 17 Pro",
+    "specs": "256GB | Silver | 1 SIM | Aktiv",
+    "price": "1,300$ (59,150 TL)",
+    "images": [
+      "shopping.webp",
+      "surat2.webp",
+      "surat3.webp",
+      "surat4.webp",
+      "surat5.webp",
+      "surat6.webp",
+      "surat7.webp"
+    ]
+  },
+  {
+    "name": "iPhone 17 Pro Max",
+    "specs": "256GB | Blue | 1 SIM | Täze",
+    "price": "1,405$ (63,927 TL)",
+    "images": [
+      "max1.jpg",
+      "max2.jpg",
+      "max3.jpg",
+      "max4.jpg"
+    ]
+  },
+  {
+    "name": "iPhone 17 Pro Orange",
+    "specs": "256GB | Orange | 1 SIM | Täze",
+    "price": "1,300$ (59,150 TL)",
+    "images": [
+      "orange1.jpg",
+      "orange2.jpg",
+      "orange3.jpg",
+      "orange4.jpg"
+    ]
+  },
+  {
+    "name": "Samsung S24",
+    "specs": "Black | Täze | Iki görnüşli ýat",
+    "price": "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)",
+    "images": [
+      "s24_1.jpg",
+      "s24_2.jpg",
+      "s24_3.jpg"
+    ]
+  },
+  {
+    "name": "Samsung S25 Ultra",
+    "specs": "12/256GB | Gray, Blue, Black | Täze",
+    "price": "920$ (41,860 TL)",
+    "images": [
+      "s25u_1.jpg",
+      "s25u_2.jpg",
+      "s25u_3.jpg",
+      "s25u_4.jpg"
+    ]
+  },
+  {
+    "name": "Infinix GT 30 Pro",
+    "specs": "12/256GB | Gaming Edition | 5G | Täze",
+    "price": "325$ (14,787 TL)",
+    "images": [
+      "gt30_1.jpg",
+      "gt30_2.jpg",
+      "gt30_3.jpg",
+      "gt30_4.jpg"
+    ]
+  },
+  {
+    "name": "Samsung A26",
+    "specs": "6/128GB | Täze | Netijeli Model",
+    "price": "215$ (9,782 TL)",
+    "images": [
+      "a26_1.jpg",
+      "a26_2.jpg",
+      "a26_3.jpg",
+      "a26_4.jpg"
+    ]
+  },
+  {
+    "name": "Samsung A17",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "4/128GB: 173$ (7,871 TL) <br> 6/128GB: 185$ (8,417 TL)",
+    "images": [
+      "a17_1.jpg",
+      "a17_2.jpg",
+      "a17_3.jpg",
+      "a17_4.jpg"
+    ]
+  },
+  {
+    "name": "Samsung A16",
+    "specs": "8/256GB | Täze | Gara, Ýaşyl, Çüýşebendi",
+    "price": "200$ (9,100 TL)",
+    "images": [
+      "a16_1.jpg",
+      "a16_2.jpg",
+      "a16_3.jpg",
+      "a16_4.jpg",
+      "a16_5.jpg",
+      "a16_6.jpg"
+    ]
+  },
+  {
+    "name": "Samsung A07",
+    "specs": "4/64GB | Täze | Amatly baha",
+    "price": "162$ (7,371 TL)",
+    "images": [
+      "a07_1.jpg",
+      "a07_2.jpg",
+      "a07_3.jpg",
+      "a07_4.jpg"
+    ]
+  }
+]
