@@ -17,12 +17,11 @@
         header { padding: 20px; text-align: center; }
         header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
         
-        /* Professional Marka Ikonkalary */
-        .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; max-width: 600px; margin: 0 auto; }
-        .brand-btn { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 15px 5px; cursor: pointer; text-align: center; transition: 0.3s; color: #888; }
-        .brand-btn i { font-size: 28px; display: block; margin-bottom: 8px; }
-        .brand-btn span { font-size: 12px; font-weight: 600; text-transform: uppercase; }
-        .brand-btn.active { border-color: var(--gold); color: var(--gold); background: #252525; }
+        /* Marka Bar */
+        .brand-bar { display: flex; justify-content: center; gap: 15px; padding: 10px; flex-wrap: wrap; }
+        .brand-btn { background: #222; border: 1px solid #444; color: #fff; padding: 10px; border-radius: 12px; cursor: pointer; min-width: 60px; text-align: center; }
+        .brand-btn.active { border-color: var(--gold); color: var(--gold); }
+        .brand-btn i { font-size: 20px; display: block; margin-bottom: 5px; }
 
         .container { padding: 15px; }
         .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
@@ -47,64 +46,76 @@
         <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
         <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
     </div>
+    
+    <header>
+        <h1 id="main-title">Kargo Mobile</h1>
+        <p id="sub-title" style="color:#888; padding: 10px;">Amatly we Çalt Eltip Bermek</p>
+        <p id="welcome-msg" style="color:#f1c40f; font-size: 14px; padding: 0 20px;">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
+    </header>
 
-    <header><h1 id="main-title">Kargo Telefon</h1><p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p></header>
-
-    <div class="brand-grid">
-        <div class="brand-btn active" onclick="filterBrand('all', this)"><i class="fa-solid fa-layer-group"></i><span class="b-txt" data-key="all">Ählisi</span></div>
-        <div class="brand-btn" onclick="filterBrand('iPhone', this)"><i class="fa-brands fa-apple"></i><span class="b-txt" data-key="apple">iPhone</span></div>
-        <div class="brand-btn" onclick="filterBrand('Samsung', this)"><i class="fa-solid fa-mobile-screen-button"></i><span class="b-txt" data-key="samsung">Samsung</span></div>
-        <div class="brand-btn" onclick="filterBrand('Infinix', this)"><i class="fa-solid fa-bolt"></i><span class="b-txt" data-key="infinix">Infinix</span></div>
-        <div class="brand-btn" onclick="filterBrand('Xiaomi', this)"><i class="fa-solid fa-microchip"></i><span class="b-txt" data-key="xiaomi">Xiaomi</span></div>
-        <div class="brand-btn" onclick="filterBrand('Amatly', this)"><i class="fa-solid fa-tags"></i><span class="b-txt" data-key="cheap">Amatly</span></div>
+    <div class="brand-bar">
+        <button class="brand-btn" onclick="filterBy('all', this)"><i>📱</i><span class="b-txt" data-key="all">Ählisi</span></button>
+        <button class="brand-btn" onclick="filterBy('iPhone', this)"><i>🍎</i><span>iPhone</span></button>
+        <button class="brand-btn" onclick="filterBy('Samsung', this)"><i>🔹</i><span>Samsung</span></button>
+        <button class="brand-btn" onclick="filterBy('Infinix', this)"><i>⚡</i><span>Infinix</span></button>
     </div>
 
-    <div class="container" id="product-list"></div>
+    <div class="container" id="product-list">
+        <p id="start-msg" style="text-align:center; color:#555; margin-top:50px;">Görmek isleýän modeliňizi ýokardan saýlaň</p>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
-        let currentBrand = 'all';
         let allProducts = [];
+        let selectedBrand = 'none';
 
         const trans = {
-            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!", all: "Ählisi", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Amatly" },
-            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!", all: "Hepsi", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Uygun" },
-            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!", all: "Все", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Выгодно" },
-            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!", all: "All", apple: "iPhone", samsung: "Samsung", infinix: "Infinix", xiaomi: "Xiaomi", cheap: "Deals" }
+            tm: { sub: "Amatly we Çalt Eltip Bermek", welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", start: "Görmek isleýän modeliňizi ýokardan saýlaň", buy: "Sargyt Et", off: "Internet ýok!", all: "Ählisi" },
+            tr: { sub: "Hızlı ve Uygun Teslimat", welcome: "Kargo Mobile Hizmetinizde. Telefonlar uygun fiyatlı ve hızlı teslimat hizmeti bizde!", start: "Görmek istediğiniz modeli yukarıdan seçiniz", buy: "Sipariş Ver", off: "İnternet yok!", all: "Hepsi" },
+            ru: { sub: "Быстрая доставка", welcome: "Kargo Mobile к вашим услугам. У нас доступные цены и быстрая доставка телефонов!", start: "Выберите интересующую модель выше", buy: "Заказать", off: "Нет интернета!", all: "Все" },
+            en: { sub: "Fast Delivery", welcome: "Kargo Mobile at your service. Affordable prices and fast delivery!", start: "Please select a model above", buy: "Order Now", off: "No Internet!", all: "All" }
         };
 
         async function loadProducts() {
             try {
                 const response = await fetch('products.json?v=' + new Date().getTime());
                 allProducts = await response.json();
-                renderProducts();
-            } catch (e) { console.log("Harytlar ýüklenmedi: ", e); }
+                // Ilki bilen hiç zat görkezmeýär (selectedBrand = 'none')
+            } catch (e) { console.log(e); }
         }
 
-        function renderProducts() {
+        function filterBy(brand, el) {
+            selectedBrand = brand;
+            document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
+            if(el) el.classList.add('active');
+            render();
+        }
+
+        function render() {
             const list = document.getElementById('product-list');
             list.innerHTML = '';
-            
+
+            if (selectedBrand === 'none') {
+                list.innerHTML = `<p style="text-align:center; color:#555; margin-top:50px;">${trans[currentLang].start}</p>`;
+                return;
+            }
+
             const filtered = allProducts.filter(p => {
-                if (currentBrand === 'all') return true;
-                if (currentBrand === 'Amatly') return parseInt(p.price) < 200 || p.name.includes("A07");
-                return p.name.toLowerCase().includes(currentBrand.toLowerCase());
+                if (selectedBrand === 'all') return true;
+                return p.name.toLowerCase().includes(selectedBrand.toLowerCase());
             });
 
             filtered.forEach((p, index) => {
-                let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}" onerror="this.src='https://via.placeholder.com/300?text=Surat+Tapylmady'"></div>`).join('');
+                let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}"></div>`).join('');
                 list.innerHTML += `
                     <div class="card">
-                        <div class="swiper mySwiper-${index}">
-                            <div class="swiper-wrapper">${slides}</div>
-                            <div class="swiper-pagination"></div>
-                        </div>
+                        <div class="swiper mySwiper-${index}"><div class="swiper-wrapper">${slides}</div><div class="swiper-pagination"></div></div>
                         <div class="info">
                             <h3>${p.name}</h3>
                             <div class="specs">${p.specs}</div>
                             <p class="price">${p.price}</p>
-                            <a href="https://wa.me/99364041065?text=Salam, men ${p.name} (${p.specs}) sargyt etmek isleýärin." class="buy-btn">${trans[currentLang].buy}</a>
+                            <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
                         </div>
                     </div>`;
             });
@@ -114,27 +125,15 @@
             });
         }
 
-        function filterBrand(brand, el) {
-            currentBrand = brand;
-            document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-            renderProducts();
-        }
-
         function changeLang(l) {
             currentLang = l;
             document.getElementById('sub-title').innerText = trans[l].sub;
+            document.getElementById('welcome-msg').innerText = trans[l].welcome;
             document.getElementById('off-text').innerText = trans[l].off;
-            
-            // Marka atlaryny terjime etmek
-            document.querySelectorAll('.b-txt').forEach(span => {
-                const key = span.getAttribute('data-key');
-                span.innerText = trans[l][key];
-            });
-
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
-            renderProducts();
+            document.querySelector('.b-txt').innerText = trans[l].all;
+            render();
         }
 
         window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
