@@ -15,15 +15,16 @@
         .lang-bar button.active { background: var(--gold); color: #000; }
         header { padding: 20px; text-align: center; }
         header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
+        .welcome-msg { color: #f1c40f; font-size: 14px; padding: 10px 20px; text-align: center; line-height: 1.4; }
+        .brand-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 10px; }
+        .brand-nav button { background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 12px; cursor: pointer; min-width: 70px; text-align: center; }
+        .brand-nav button.active { border-color: var(--gold); color: var(--gold); }
         .container { padding: 15px; }
         .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
         .swiper { width: 100%; height: 300px; background: #000; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
-        .swiper-pagination-bullet { background: var(--gold) !important; opacity: 0.6; }
-        .swiper-pagination-bullet-active { opacity: 1; }
         .info { padding: 20px; text-align: left; }
-        .specs { color: #888; font-size: 14px; margin: 5px 0; }
         .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
         .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
         #offline-warning { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
@@ -33,70 +34,84 @@
     <div id="offline-warning"><h1>⚠️</h1><h2 id="off-text">Internet ýok</h2></div>
     <div class="safe-area"></div>
     <div class="lang-bar">
-        <button onclick="changeLang('tm')" id="btn-tm" class="active">🇹🇲 TM</button>
-        <button onclick="changeLang('tr')" id="btn-tr">🇹🇷 TR</button>
-        <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
-        <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
+        <button onclick="changeLang('tm')" id="btn-tm" class="active">TM</button>
+        <button onclick="changeLang('tr')" id="btn-tr">TR</button>
+        <button onclick="changeLang('ru')" id="btn-ru">RU</button>
+        <button onclick="changeLang('en')" id="btn-en">EN</button>
     </div>
     <header>
-        <h1 id="main-title">Kargo Telefon</h1>
-        <p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p>
+        <h1 id="main-title">Kargo Mobile</h1>
+        <p id="welcome-msg">Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!</p>
     </header>
+    <div class="brand-nav">
+        <button onclick="setFilter('all', this)">Ählisi</button>
+        <button onclick="setFilter('iPhone', this)">iPhone</button>
+        <button onclick="setFilter('Samsung', this)">Samsung</button>
+        <button onclick="setFilter('Infinix', this)">Infinix</button>
+    </div>
     <div class="container" id="product-list"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
+        let allProducts = [];
+        let activeFilter = 'all';
+
         const trans = {
-            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!" },
-            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!" },
-            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!" },
-            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!" }
+            tm: { buy: "Sargyt Et", welcome: "Kargo Mobile Siziň hyzmatyňyzda. Telefonlar amatly we çalt getirmek hyzmaty bizde!", off: "Internet ýok!" },
+            tr: { buy: "Sipariş Ver", welcome: "Kargo Mobile hizmetinizde. Uygun ve hızlı teslimat!", off: "İnternet yok!" },
+            ru: { buy: "Заказать", welcome: "Kargo Mobile к вашим услугам. Быстрая доставка!", off: "Нет интернета!" },
+            en: { buy: "Order Now", welcome: "Kargo Mobile at your service. Fast delivery!", off: "No Internet!" }
         };
 
         async function loadProducts() {
             try {
-                const response = await fetch('products.json?v=' + new Date().getTime());
-                const products = await response.json();
-                const list = document.getElementById('product-list');
-                
-                products.forEach((p, index) => {
-                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}"></div>`).join('');
-                    list.innerHTML += `
-                        <div class="card">
-                            <div class="swiper mySwiper-${index}">
-                                <div class="swiper-wrapper">${slides}</div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div class="info">
-                                <h3>${p.name}</h3>
-                                <div class="specs">${p.specs}</div>
-                                <p class="price">${p.price}</p>
-                                <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
-                            </div>
-                        </div>`;
-                });
+                const res = await fetch('products.json?v=' + Date.now());
+                allProducts = await res.json();
+                render();
+            } catch (e) { console.error(e); }
+        }
 
-                products.forEach((p, index) => {
-                    new Swiper(`.mySwiper-${index}`, {
+        function setFilter(f, btn) {
+            activeFilter = f;
+            document.querySelectorAll('.brand-nav button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            render();
+        }
+
+        function render() {
+            const list = document.getElementById('product-list');
+            list.innerHTML = '';
+            const filtered = allProducts.filter(p => activeFilter === 'all' || p.name.includes(activeFilter));
+
+            filtered.forEach((p, i) => {
+                const slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
+                list.innerHTML += `<div class="card">
+                    <div class="swiper swiper-${i}"><div class="swiper-wrapper">${slides}</div><div class="swiper-pagination"></div></div>
+                    <div class="info"><h3>${p.name}</h3><div style="color:#888; font-size:14px;">${p.specs}</div><p class="price">${p.price}</p><a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a></div>
+                </div>`;
+            });
+
+            // SURATLAR ÜÇIN ANYK ÇÖZGÜT:
+            setTimeout(() => {
+                filtered.forEach((_, i) => {
+                    new Swiper(`.swiper-${i}`, { 
                         pagination: { el: ".swiper-pagination", clickable: true },
+                        observer: true, observeParents: true
                     });
                 });
-            } catch (e) { console.log(e); }
+            }, 300);
         }
 
         function changeLang(l) {
             currentLang = l;
-            document.getElementById('sub-title').innerText = trans[l].sub;
+            document.getElementById('welcome-msg').innerText = trans[l].welcome;
             document.getElementById('off-text').innerText = trans[l].off;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
-            const btns = document.querySelectorAll('.buy-btn');
-            btns.forEach(b => b.innerText = trans[l].buy);
+            render();
         }
 
-        window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
-        window.addEventListener('online', () => document.getElementById('offline-warning').style.display = 'none');
         loadProducts();
     </script>
 </body>
