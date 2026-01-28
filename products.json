@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Kargo Telefon</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root { --gold: #f1c40f; --dark-bg: #121212; --card-bg: #1e1e1e; --text-white: #ffffff; }
@@ -38,10 +37,7 @@
         <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
         <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
     </div>
-    <header>
-        <h1 id="main-title">Kargo Telefon</h1>
-        <p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p>
-    </header>
+    <header><h1 id="main-title">Kargo Telefon</h1><p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p></header>
     <div class="container" id="product-list"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -56,12 +52,15 @@
 
         async function loadProducts() {
             try {
+                // Brauzeriň ýadyny (cache) aldamak üçin wagty ulanýarys
                 const response = await fetch('products.json?v=' + new Date().getTime());
                 const products = await response.json();
                 const list = document.getElementById('product-list');
+                list.innerHTML = '';
                 
                 products.forEach((p, index) => {
-                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}"></div>`).join('');
+                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="./${img}" onerror="this.src='https://via.placeholder.com/300?text=Surat+Tapylmady'"></div>`).join('');
+                    
                     list.innerHTML += `
                         <div class="card">
                             <div class="swiper mySwiper-${index}">
@@ -72,7 +71,7 @@
                                 <h3>${p.name}</h3>
                                 <div class="specs">${p.specs}</div>
                                 <p class="price">${p.price}</p>
-                                <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
+                                <a href="https://wa.me/99364041065?text=Salam, men ${p.name} (${p.specs}) sargyt etmek isleýärin." class="buy-btn">${trans[currentLang].buy}</a>
                             </div>
                         </div>`;
                 });
@@ -80,9 +79,12 @@
                 products.forEach((p, index) => {
                     new Swiper(`.mySwiper-${index}`, {
                         pagination: { el: ".swiper-pagination", clickable: true },
+                        observer: true,
+                        observeParents: true
                     });
                 });
-            } catch (e) { console.log(e); }
+
+            } catch (e) { console.log("Harytlar ýüklenmedi: ", e); }
         }
 
         function changeLang(l) {
@@ -91,8 +93,7 @@
             document.getElementById('off-text').innerText = trans[l].off;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
-            const btns = document.querySelectorAll('.buy-btn');
-            btns.forEach(b => b.innerText = trans[l].buy);
+            loadProducts();
         }
 
         window.addEventListener('offline', () => document.getElementById('offline-warning').style.display = 'flex');
