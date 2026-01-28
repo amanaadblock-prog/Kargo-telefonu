@@ -10,53 +10,82 @@
         :root { --gold: #f1c40f; --dark-bg: #121212; --card-bg: #1e1e1e; --text-white: #ffffff; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding: 0; }
         .safe-area { height: 40px; background: #000; }
+        
+        /* Diller we Baydaklar */
         .lang-bar { background: #000; padding: 15px; display: flex; justify-content: center; gap: 10px; border-bottom: 1px solid #333; }
-        .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+        .lang-bar button { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
         .lang-bar button.active { background: var(--gold); color: #000; }
+        
         header { padding: 20px; text-align: center; }
         header h1 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 24px; }
+        
         .container { padding: 15px; }
         .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
         .swiper { width: 100%; height: 300px; background: #000; }
-        .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
+        .swiper-pagination-bullet { background: var(--gold) !important; opacity: 0.6; }
+        
         .info { padding: 20px; text-align: left; }
+        .specs { color: #888; font-size: 14px; margin: 5px 0; }
         .price { font-size: 22px; color: var(--gold); font-weight: bold; margin: 15px 0; }
         .buy-btn { display: block; background: var(--gold); color: #000; text-align: center; padding: 15px; text-decoration: none; border-radius: 12px; font-weight: bold; }
+
+        /* INTERNET ÝOK BOLSA EKRANY ÝAPÝAN SISTEMA */
+        #offline-warning { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: #000; 
+            z-index: 99999; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center;
+        }
+        #offline-warning i { font-size: 80px; color: var(--gold); margin-bottom: 20px; }
     </style>
 </head>
 <body>
+    <div id="offline-warning">
+        <i class="fa-solid fa-wifi"></i>
+        <h1 id="off-text" style="color: #fff;">Internet ýok</h1>
+        <p style="color: #888;">Programmany ulanmak üçin internete birigiň.</p>
+    </div>
+
     <div class="safe-area"></div>
     <div class="lang-bar">
-        <button onclick="changeLang('tm')" id="btn-tm" class="active">TM</button>
-        <button onclick="changeLang('tr')" id="btn-tr">TR</button>
-        <button onclick="changeLang('ru')" id="btn-ru">RU</button>
-        <button onclick="changeLang('en')" id="btn-en">EN</button>
+        <button onclick="changeLang('tm')" id="btn-tm" class="active">🇹🇲 TM</button>
+        <button onclick="changeLang('tr')" id="btn-tr">🇹🇷 TR</button>
+        <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
+        <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
     </div>
-    <header><h1>Kargo Mobile</h1></header>
+    
+    <header>
+        <h1 id="main-title">Kargo Telefon</h1>
+        <p id="sub-title" style="color:#888;">Amatly we Çalt Eltip Bermek</p>
+    </header>
+
     <div class="container" id="product-list"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let currentLang = 'tm';
         const trans = {
-            tm: { buy: "Sargyt Et" },
-            tr: { buy: "Sipariş Ver" },
-            ru: { buy: "Заказать" },
-            en: { buy: "Order Now" }
+            tm: { sub: "Amatly we Çalt Eltip Bermek", buy: "Sargyt Et", off: "Internet ýok!" },
+            tr: { sub: "Hızlı ve Uygun Teslimat", buy: "Sipariş Ver", off: "İnternet yok!" },
+            ru: { sub: "Быстрая доставка", buy: "Заказать", off: "Нет интернета!" },
+            en: { sub: "Fast Delivery", buy: "Order Now", off: "No Internet!" }
         };
 
         async function loadProducts() {
             try {
-                // cache-den gaçmak üçin taze wagt goşýarys
                 const response = await fetch('products.json?v=' + Date.now());
                 const products = await response.json();
                 const list = document.getElementById('product-list');
                 list.innerHTML = '';
                 
                 products.forEach((p, index) => {
-                    // Surat yolundaky nokatlary anykdygy barlanyar
-                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}" loading="eager"></div>`).join('');
+                    let slides = p.images.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
                     list.innerHTML += `
                         <div class="card">
                             <div class="swiper mySwiper-${index}">
@@ -65,35 +94,50 @@
                             </div>
                             <div class="info">
                                 <h3>${p.name}</h3>
-                                <div style="color:#888; font-size:14px;">${p.specs}</div>
+                                <div class="specs">${p.specs}</div>
                                 <p class="price">${p.price}</p>
                                 <a href="https://wa.me/99364041065" class="buy-btn">${trans[currentLang].buy}</a>
                             </div>
                         </div>`;
                 });
 
-                // Swiper-i harytlar HTML-e goşulandan soň işletmek
                 setTimeout(() => {
-                    products.forEach((p, index) => {
+                    products.forEach((_, index) => {
                         new Swiper(`.mySwiper-${index}`, {
                             pagination: { el: ".swiper-pagination", clickable: true },
                             observer: true,
-                            observeParents: true,
-                            preloadImages: true
+                            observeParents: true
                         });
                     });
-                }, 100);
-            } catch (e) { console.log("Haryt yuklenmedi!", e); }
+                }, 300);
+            } catch (e) { console.log(e); }
         }
 
         function changeLang(l) {
             currentLang = l;
+            document.getElementById('sub-title').innerText = trans[l].sub;
+            document.getElementById('off-text').innerText = trans[l].off;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + l).classList.add('active');
-            const btns = document.querySelectorAll('.buy-btn');
-            btns.forEach(b => b.innerText = trans[l].buy);
+            
+            // Harytlar ýüklenen bolsa knopkalary terjime et
+            document.querySelectorAll('.buy-btn').forEach(b => b.innerText = trans[l].buy);
         }
 
+        // INTERNET KONTROLY
+        function checkConnectivity() {
+            if (!navigator.onLine) {
+                document.getElementById('offline-warning').style.display = 'flex';
+            } else {
+                document.getElementById('offline-warning').style.display = 'none';
+            }
+        }
+
+        window.addEventListener('offline', checkConnectivity);
+        window.addEventListener('online', checkConnectivity);
+        
+        // Başlangyçda barlag
+        checkConnectivity();
         loadProducts();
     </script>
 </body>
