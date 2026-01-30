@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Kargo Mobile Premium</title>
+    <title>Kargo Mobile Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root { --gold: #f1c40f; --dark-bg: #0c0c0c; --card-bg: #161616; --text-white: #ffffff; }
-        
-        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: env(safe-area-inset-bottom); }
+        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: 30px; }
 
-        /* Internet Warning */
+        /* Internet Gözegçiligi */
         #offline-overlay { 
             display: none; position: fixed; inset: 0; background: #000; 
             z-index: 99999; flex-direction: column; align-items: center; 
@@ -19,61 +18,60 @@
         }
         #offline-overlay i { font-size: 70px; color: var(--gold); margin-bottom: 20px; }
 
-        /* Dilleri aşak süýşürdik (Kameranyň aşagy) */
+        /* Diller (Kameranyň aşagynda) */
         .lang-bar { 
-            padding-top: env(safe-area-inset-top); /* iPhone "notch" üçin */
-            background: #000; padding-bottom: 10px; display: flex; 
-            justify-content: center; gap: 6px; border-bottom: 1px solid #222;
+            padding-top: calc(env(safe-area-inset-top) + 10px);
+            background: #000; padding-bottom: 12px; display: flex; 
+            justify-content: center; gap: 8px; border-bottom: 1px solid #222;
         }
         .lang-bar button { 
-            background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 6px 10px; 
-            border-radius: 8px; font-size: 12px; cursor: pointer; transition: 0.3s;
+            background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 6px 12px; 
+            border-radius: 8px; font-size: 12px; cursor: pointer;
         }
         .lang-bar button.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: bold; }
 
         header { padding: 15px 20px; text-align: center; }
-        header h1 { margin: 0; font-size: 24px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; }
+        header h1 { margin: 0; font-size: 24px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Brendler Ekrana Sygar ýaly edildi */
+        /* Brendler Navigasiýasy */
         .brand-nav { 
             display: flex; justify-content: space-around; align-items: center;
             padding: 10px 5px; background: #0c0c0c; border-bottom: 1px solid #1a1a1a;
+            position: sticky; top: 0; z-index: 998;
         }
-        .brand-item { 
-            text-align: center; cursor: pointer; transition: 0.3s;
-            flex: 1; min-width: 60px;
-        }
+        .brand-item { text-align: center; cursor: pointer; flex: 1; }
         .brand-item i { font-size: 20px; display: block; margin-bottom: 4px; color: #555; }
-        .brand-item span { font-size: 10px; font-weight: bold; color: #555; text-transform: uppercase; }
-        .brand-item.active i { color: var(--gold); }
-        .brand-item.active span { color: var(--gold); }
+        .brand-item span { font-size: 10px; font-weight: bold; color: #555; }
+        .brand-item.active i, .brand-item.active span { color: var(--gold); }
 
+        /* Kart dizaýny */
         .container { padding: 12px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #222; margin-bottom: 20px; }
-        
-        .swiper { width: 100%; height: 300px; background: #000; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #222; margin-bottom: 25px; }
+        .swiper { width: 100%; height: 320px; background: #000; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
         
-        .info { padding: 18px; }
-        .model-name { font-size: 19px; font-weight: 800; margin-bottom: 4px; }
-        .specs { color: #888; font-size: 12px; margin-bottom: 12px; line-height: 1.4; }
-        .price-box { font-size: 20px; color: var(--gold); font-weight: 900; margin-bottom: 15px; }
+        .info { padding: 20px; }
+        .model-name { font-size: 20px; font-weight: 800; margin-bottom: 5px; }
+        .specs { color: #888; font-size: 13px; margin-bottom: 15px; }
+        
+        /* Baha dizaýny */
+        .price-container { margin-bottom: 20px; }
+        .price-usd { font-size: 24px; color: var(--gold); font-weight: 900; display: block; }
+        .price-tl { font-size: 16px; color: #aaa; font-weight: 500; }
 
         .buy-btn { 
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: var(--gold); color: #000; text-decoration: none; padding: 14px; 
-            border-radius: 12px; font-weight: 900; font-size: 14px;
+            background: var(--gold); color: #000; text-decoration: none; padding: 15px; 
+            border-radius: 12px; font-weight: 900; font-size: 14px; text-transform: uppercase;
         }
-
-        .footer-space { height: 40px; }
     </style>
 </head>
 <body>
 
     <div id="offline-overlay">
-        <i class="fa-solid fa-triangle-exclamation"></i>
+        <i class="fa-solid fa-wifi"></i>
         <h2 id="off-title">Internet ýok</h2>
-        <p id="off-desc">Dowam etmek üçin internete birigiň.</p>
+        <p>Programmany ulanmak üçin internete birigiň.</p>
     </div>
 
     <div class="lang-bar">
@@ -83,9 +81,7 @@
         <button onclick="changeLang('en')" id="btn-en">EN</button>
     </div>
     
-    <header>
-        <h1 id="main-title">Kargo Mobile</h1>
-    </header>
+    <header><h1>Kargo Mobile</h1></header>
 
     <div class="brand-nav">
         <div class="brand-item active" onclick="setFilter('all', this)">
@@ -100,86 +96,70 @@
         <div class="brand-item" onclick="setFilter('Infinix', this)">
             <i class="fa-solid fa-bolt"></i><span>Infinix</span>
         </div>
-        <div class="brand-item" onclick="setFilter('Tecno/Redmi', this)">
-            <i class="fa-solid fa-microchip"></i><span>Beýleki</span>
+        <div class="brand-item" onclick="setFilter('Other', this)">
+            <i class="fa-solid fa-ellipsis"></i><span id="t-other">Beýleki</span>
         </div>
     </div>
 
     <div class="container" id="product-list"></div>
-    <div class="footer-space"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const phoneWA = "99361234567"; // Oz belginiz
+        const phoneWA = "99361234567";
 
         const translations = {
-            tm: { all: "Hemmesi", buy: "Sargyt et", offT: "Internet ýok", msg: "Salam, sargyt etmek isleýärin: " },
-            tr: { all: "Hepsi", buy: "Sipariş Ver", offT: "İnternet Yok", msg: "Merhaba, sipariş vermek istiyorum: " },
-            ru: { all: "Все", buy: "Заказать", offT: "Нет интернета", msg: "Здравствуйте, хочу заказать: " },
-            en: { all: "All", buy: "Order", offT: "No Internet", msg: "Hello, I want to order: " }
+            tm: { all: "Hemmesi", other: "Beýleki", buy: "Sargyt et", offT: "Internet ýok", msg: "Salam, sargyt etmek isleýärin: " },
+            tr: { all: "Hepsi", other: "Diğer", buy: "Sipariş Ver", offT: "İnternet Yok", msg: "Merhaba, sipariş vermek istiyorum: " },
+            ru: { all: "Все", other: "Прочее", buy: "Заказать", offT: "Нет интернета", msg: "Здравствуйте, хочу заказать: " },
+            en: { all: "All", other: "Other", buy: "Order", offT: "No Internet", msg: "Hello, I want to order: " }
         };
 
-        // Ähli öňki modelleriňi şu taýyk jemledim
         const products = [
-            { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | 1 SIM | Täze", price: "1,405$ (63,927 TL)", images: ["max1.jpg", "max2.jpg"] },
-            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | Täze", price: "1,300$ (59,150 TL)", images: ["iphone17_1.jpg"] },
-            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray | Täze", price: "920$ (41,860 TL)", images: ["s25u_1.jpg", "s25u_2.jpg"] },
-            { name: "Samsung A56", brand: "Samsung", specs: "8/128GB | Täze | Black", price: "313$ (14,241 TL)", images: ["a56_1.jpg"] },
-            { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Foldable", price: "440$ (20,020 TL)", images: ["zeroflip_1.jpg"] },
-            { name: "Infinix Note 50 Pro", brand: "Infinix", specs: "12/256GB | Täze", price: "265$ (12,058 TL)", images: ["n50p_1.jpg"] },
-            { name: "Infinix Note 50S", brand: "Infinix", specs: "8/256GB | Grey", price: "260$ (11,830 TL)", images: ["n50s_1.jpg"] },
-            { name: "Tecno Camon 40 Pro", brand: "Tecno/Redmi", specs: "8/256GB | Täze", price: "250$ (11,375 TL)", images: ["camon40_1.jpg"] },
-            { name: "Redmi Note 15 Pro", brand: "Tecno/Redmi", specs: "8/256GB | Pro", price: "280$ (12,740 TL)", images: ["r15p_1.jpg"] },
-            { name: "X Pad 20", brand: "Infinix", specs: "4/128GB | Tablet", price: "175$ (7,963 TL)", images: ["xpad_1.jpg"] }
+            { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | 1 SIM | Täze", usd: "1,405$", tl: "63,927 TL", images: ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"] },
+            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray, Blue | Täze", usd: "920$", tl: "41,860 TL", images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] },
+            { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Täze | Foldable", usd: "440$", tl: "20,020 TL", images: ["zf_1.jpg", "zf_2.jpg", "zf_3.jpg", "zf_4.jpg"] },
+            { name: "Tecno Camon 40 Pro", brand: "Other", specs: "8/256GB | Professional Camera", usd: "250$", tl: "11,375 TL", images: ["c40_1.jpg", "c40_2.jpg", "c40_3.jpg", "c40_4.jpg"] },
+            { name: "Redmi Note 15 Pro", brand: "Other", specs: "8/256GB | Pro Performance", usd: "280$", tl: "12,740 TL", images: ["r15_1.jpg", "r15_2.jpg", "r15_3.jpg", "r15_4.jpg"] }
+            // Beýleki modelleriňi hem şu tertipde dollar we tl aýryp goşup bilersiň
         ];
 
         let currentLang = 'tm';
 
-        function checkInternet() {
-            const overlay = document.getElementById('offline-overlay');
-            if (!navigator.onLine) { overlay.style.display = 'flex'; } 
-            else { overlay.style.display = 'none'; }
+        function renderProducts(filter = 'all') {
+            const list = document.getElementById('product-list');
+            list.innerHTML = '';
+            const filtered = filter === 'all' ? products : products.filter(p => p.brand === filter);
+            
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                let imgs = p.images.map(i => `<div class="swiper-slide"><img src="${i}" onerror="this.src='https://via.placeholder.com/400x400?text=${p.name}'"></div>`).join('');
+                
+                card.innerHTML = `
+                    <div class="swiper mySwiper"><div class="swiper-wrapper">${imgs}</div><div class="swiper-pagination"></div></div>
+                    <div class="info">
+                        <div class="model-name">${p.name}</div>
+                        <div class="specs">${p.specs}</div>
+                        <div class="price-container">
+                            <span class="price-usd">${p.usd}</span>
+                            <span class="price-tl">${p.tl}</span>
+                        </div>
+                        <a href="https://wa.me/${phoneWA}?text=${translations[currentLang].msg}${p.name} (${p.usd})" class="buy-btn">
+                            <i class="fa-brands fa-whatsapp"></i> ${translations[currentLang].buy}
+                        </a>
+                    </div>`;
+                list.appendChild(card);
+            });
+            new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", clickable: true } });
         }
-
-        window.addEventListener('online', checkInternet);
-        window.addEventListener('offline', checkInternet);
-        checkInternet();
 
         function changeLang(lang) {
             currentLang = lang;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
             document.getElementById('t-all').innerText = translations[lang].all;
-            document.getElementById('off-title').innerText = translations[lang].offT;
+            document.getElementById('t-other').innerText = translations[lang].other;
             renderProducts(window.activeFilter || 'all');
-        }
-
-        function renderProducts(filter = 'all') {
-            window.activeFilter = filter;
-            const list = document.getElementById('product-list');
-            list.innerHTML = '';
-            
-            const filtered = filter === 'all' ? products : products.filter(p => p.brand === filter);
-            
-            filtered.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                let imgs = p.images.map(i => `<div class="swiper-slide"><img src="${i}" onerror="this.src='https://via.placeholder.com/400x400?text=Kargo+Mobile'"></div>`).join('');
-
-                card.innerHTML = `
-                    <div class="swiper mySwiper"><div class="swiper-wrapper">${imgs}</div><div class="swiper-pagination"></div></div>
-                    <div class="info">
-                        <div class="model-name">${p.name}</div>
-                        <div class="specs">${p.specs}</div>
-                        <div class="price-box">${p.price}</div>
-                        <a href="https://wa.me/${phoneWA}?text=${translations[currentLang].msg}${p.name} (${p.price})" class="buy-btn">
-                            <i class="fa-brands fa-whatsapp"></i> ${translations[currentLang].buy}
-                        </a>
-                    </div>
-                `;
-                list.appendChild(card);
-            });
-            new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", clickable: true } });
         }
 
         function setFilter(brand, el) {
@@ -188,6 +168,15 @@
             renderProducts(brand);
         }
 
+        function checkInternet() {
+            const overlay = document.getElementById('offline-overlay');
+            if (!navigator.onLine) overlay.style.display = 'flex';
+            else overlay.style.display = 'none';
+        }
+
+        window.addEventListener('online', checkInternet);
+        window.addEventListener('offline', checkInternet);
+        checkInternet();
         renderProducts();
     </script>
 </body>
