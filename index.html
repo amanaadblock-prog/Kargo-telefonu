@@ -3,81 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Kargo Mobile Pro</title>
+    <title>Kargo Mobile Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        :root { --gold: #f1c40f; --dark-bg: #0f0f0f; --card-bg: #1a1a1a; --text-white: #ffffff; }
+        :root { --gold: #f1c40f; --dark-bg: #0c0c0c; --card-bg: #161616; --text-white: #ffffff; }
         
-        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: 30px; }
+        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: env(safe-area-inset-bottom); }
 
-        /* INTERNET KESILSE EKRANY ÝAPÝAN BÖLÜM */
+        /* Internet Warning */
         #offline-overlay { 
             display: none; position: fixed; inset: 0; background: #000; 
             z-index: 99999; flex-direction: column; align-items: center; 
             justify-content: center; text-align: center; padding: 20px;
         }
-        #offline-overlay i { font-size: 80px; color: var(--gold); margin-bottom: 20px; }
+        #offline-overlay i { font-size: 70px; color: var(--gold); margin-bottom: 20px; }
 
-        /* DILLER BÖLÜMI */
+        /* Dilleri aşak süýşürdik (Kameranyň aşagy) */
         .lang-bar { 
-            background: #000; padding: 12px; display: flex; justify-content: center; 
-            gap: 8px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000;
+            padding-top: env(safe-area-inset-top); /* iPhone "notch" üçin */
+            background: #000; padding-bottom: 10px; display: flex; 
+            justify-content: center; gap: 6px; border-bottom: 1px solid #222;
         }
         .lang-bar button { 
-            background: #222; border: 1px solid #444; color: #fff; padding: 8px 12px; 
-            border-radius: 10px; cursor: pointer; font-size: 13px; transition: 0.3s;
+            background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 6px 10px; 
+            border-radius: 8px; font-size: 12px; cursor: pointer; transition: 0.3s;
         }
         .lang-bar button.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: bold; }
 
-        header { padding: 25px 20px; text-align: center; }
-        header h1 { margin: 0; font-size: 28px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+        header { padding: 15px 20px; text-align: center; }
+        header h1 { margin: 0; font-size: 24px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; }
 
-        /* BREND ICONLAR */
-        .brand-nav { display: flex; overflow-x: auto; gap: 15px; padding: 15px 20px; scrollbar-width: none; }
-        .brand-nav::-webkit-scrollbar { display: none; }
-        .brand-item { 
-            flex: 0 0 auto; text-align: center; background: #1a1a1a; padding: 12px 18px; 
-            border-radius: 15px; border: 1px solid #333; min-width: 70px; cursor: pointer;
+        /* Brendler Ekrana Sygar ýaly edildi */
+        .brand-nav { 
+            display: flex; justify-content: space-around; align-items: center;
+            padding: 10px 5px; background: #0c0c0c; border-bottom: 1px solid #1a1a1a;
         }
-        .brand-item i { font-size: 22px; display: block; margin-bottom: 5px; color: #777; }
-        .brand-item.active { border-color: var(--gold); background: #222; }
+        .brand-item { 
+            text-align: center; cursor: pointer; transition: 0.3s;
+            flex: 1; min-width: 60px;
+        }
+        .brand-item i { font-size: 20px; display: block; margin-bottom: 4px; color: #555; }
+        .brand-item span { font-size: 10px; font-weight: bold; color: #555; text-transform: uppercase; }
         .brand-item.active i { color: var(--gold); }
-        .brand-item span { font-size: 11px; font-weight: bold; color: #888; }
+        .brand-item.active span { color: var(--gold); }
 
-        .container { padding: 15px; }
-        .card { background: var(--card-bg); border-radius: 25px; overflow: hidden; border: 1px solid #222; margin-bottom: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        .container { padding: 12px; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #222; margin-bottom: 20px; }
         
-        .swiper { width: 100%; height: 320px; background: #000; }
+        .swiper { width: 100%; height: 300px; background: #000; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
         
-        .info { padding: 20px; }
-        .model-name { font-size: 20px; font-weight: 800; margin-bottom: 5px; }
-        .specs { color: #888; font-size: 13px; margin-bottom: 15px; }
-        .price-box { font-size: 22px; color: var(--gold); font-weight: 900; margin-bottom: 20px; }
+        .info { padding: 18px; }
+        .model-name { font-size: 19px; font-weight: 800; margin-bottom: 4px; }
+        .specs { color: #888; font-size: 12px; margin-bottom: 12px; line-height: 1.4; }
+        .price-box { font-size: 20px; color: var(--gold); font-weight: 900; margin-bottom: 15px; }
 
         .buy-btn { 
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            background: var(--gold); color: #000; text-decoration: none; padding: 16px; 
-            border-radius: 15px; font-weight: 900; text-transform: uppercase; font-size: 14px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: var(--gold); color: #000; text-decoration: none; padding: 14px; 
+            border-radius: 12px; font-weight: 900; font-size: 14px;
         }
 
-        .footer-info { padding: 40px 20px; text-align: center; color: #555; font-size: 13px; }
+        .footer-space { height: 40px; }
     </style>
 </head>
 <body>
 
     <div id="offline-overlay">
-        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-triangle-exclamation"></i>
         <h2 id="off-title">Internet ýok</h2>
-        <p id="off-desc">Programmany ulanmak üçin internete birigiň.</p>
+        <p id="off-desc">Dowam etmek üçin internete birigiň.</p>
     </div>
 
     <div class="lang-bar">
-        <button onclick="changeLang('tm')" id="btn-tm" class="active">🇹🇲 TM</button>
-        <button onclick="changeLang('tr')" id="btn-tr">🇹🇷 TR</button>
-        <button onclick="changeLang('ru')" id="btn-ru">🇷🇺 RU</button>
-        <button onclick="changeLang('en')" id="btn-en">🇺🇸 EN</button>
+        <button onclick="changeLang('tm')" id="btn-tm" class="active">TM</button>
+        <button onclick="changeLang('tr')" id="btn-tr">TR</button>
+        <button onclick="changeLang('ru')" id="btn-ru">RU</button>
+        <button onclick="changeLang('en')" id="btn-en">EN</button>
     </div>
     
     <header>
@@ -86,7 +89,7 @@
 
     <div class="brand-nav">
         <div class="brand-item active" onclick="setFilter('all', this)">
-            <i class="fa-solid fa-layer-group"></i><span id="t-all">Ählisi</span>
+            <i class="fa-solid fa-border-all"></i><span id="t-all">Hemmesi</span>
         </div>
         <div class="brand-item" onclick="setFilter('iPhone', this)">
             <i class="fa-brands fa-apple"></i><span>iPhone</span>
@@ -97,40 +100,45 @@
         <div class="brand-item" onclick="setFilter('Infinix', this)">
             <i class="fa-solid fa-bolt"></i><span>Infinix</span>
         </div>
+        <div class="brand-item" onclick="setFilter('Tecno/Redmi', this)">
+            <i class="fa-solid fa-microchip"></i><span>Beýleki</span>
+        </div>
     </div>
 
     <div class="container" id="product-list"></div>
-
-    <div class="footer-info">
-        <p id="f-desc">© 2024 Kargo Mobile. Ähli hukuklar goralan.</p>
-    </div>
+    <div class="footer-space"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const phoneWA = "99361234567"; // Öz WhatsApp belgiňiz
+        const phoneWA = "99361234567"; // Oz belginiz
 
         const translations = {
-            tm: { all: "Ählisi", buy: "Sargyt et", offT: "Internet ýok", offD: "Programmany ulanmak üçin internete birigiň.", msg: "Salam, men sargyt etmek isleýärin: " },
-            tr: { all: "Hepsi", buy: "Sipariş Ver", offT: "İnternet Yok", offD: "Uygulamayı kullanmak için internete bağlanın.", msg: "Merhaba, sipariş vermek istiyorum: " },
-            ru: { all: "Все", buy: "Заказать", offT: "Нет интернета", offD: "Подключитесь к интернету для работы.", msg: "Здравствуйте, я хочу заказать: " },
-            en: { all: "All", buy: "Order Now", offT: "No Internet", offD: "Please connect to internet to use app.", msg: "Hello, I want to order: " }
+            tm: { all: "Hemmesi", buy: "Sargyt et", offT: "Internet ýok", msg: "Salam, sargyt etmek isleýärin: " },
+            tr: { all: "Hepsi", buy: "Sipariş Ver", offT: "İnternet Yok", msg: "Merhaba, sipariş vermek istiyorum: " },
+            ru: { all: "Все", buy: "Заказать", offT: "Нет интернета", msg: "Здравствуйте, хочу заказать: " },
+            en: { all: "All", buy: "Order", offT: "No Internet", msg: "Hello, I want to order: " }
         };
 
+        // Ähli öňki modelleriňi şu taýyk jemledim
         const products = [
             { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | 1 SIM | Täze", price: "1,405$ (63,927 TL)", images: ["max1.jpg", "max2.jpg"] },
+            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | Täze", price: "1,300$ (59,150 TL)", images: ["iphone17_1.jpg"] },
             { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray | Täze", price: "920$ (41,860 TL)", images: ["s25u_1.jpg", "s25u_2.jpg"] },
-            { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Täze", price: "440$ (20,020 TL)", images: ["zeroflip_1.jpg", "zeroflip_2.jpg"] }
+            { name: "Samsung A56", brand: "Samsung", specs: "8/128GB | Täze | Black", price: "313$ (14,241 TL)", images: ["a56_1.jpg"] },
+            { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Foldable", price: "440$ (20,020 TL)", images: ["zeroflip_1.jpg"] },
+            { name: "Infinix Note 50 Pro", brand: "Infinix", specs: "12/256GB | Täze", price: "265$ (12,058 TL)", images: ["n50p_1.jpg"] },
+            { name: "Infinix Note 50S", brand: "Infinix", specs: "8/256GB | Grey", price: "260$ (11,830 TL)", images: ["n50s_1.jpg"] },
+            { name: "Tecno Camon 40 Pro", brand: "Tecno/Redmi", specs: "8/256GB | Täze", price: "250$ (11,375 TL)", images: ["camon40_1.jpg"] },
+            { name: "Redmi Note 15 Pro", brand: "Tecno/Redmi", specs: "8/256GB | Pro", price: "280$ (12,740 TL)", images: ["r15p_1.jpg"] },
+            { name: "X Pad 20", brand: "Infinix", specs: "4/128GB | Tablet", price: "175$ (7,963 TL)", images: ["xpad_1.jpg"] }
         ];
 
         let currentLang = 'tm';
 
         function checkInternet() {
             const overlay = document.getElementById('offline-overlay');
-            if (!navigator.onLine) {
-                overlay.style.display = 'flex';
-            } else {
-                overlay.style.display = 'none';
-            }
+            if (!navigator.onLine) { overlay.style.display = 'flex'; } 
+            else { overlay.style.display = 'none'; }
         }
 
         window.addEventListener('online', checkInternet);
@@ -141,11 +149,8 @@
             currentLang = lang;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
-            
             document.getElementById('t-all').innerText = translations[lang].all;
             document.getElementById('off-title').innerText = translations[lang].offT;
-            document.getElementById('off-desc').innerText = translations[lang].offD;
-            
             renderProducts(window.activeFilter || 'all');
         }
 
@@ -159,8 +164,7 @@
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                
-                let imgs = p.images.map(i => `<div class="swiper-slide"><img src="${i}" onerror="this.src='https://via.placeholder.com/400x400?text=${p.name}'"></div>`).join('');
+                let imgs = p.images.map(i => `<div class="swiper-slide"><img src="${i}" onerror="this.src='https://via.placeholder.com/400x400?text=Kargo+Mobile'"></div>`).join('');
 
                 card.innerHTML = `
                     <div class="swiper mySwiper"><div class="swiper-wrapper">${imgs}</div><div class="swiper-pagination"></div></div>
