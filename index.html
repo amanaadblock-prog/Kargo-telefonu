@@ -40,18 +40,17 @@
             position: sticky; top: 0; z-index: 999;
         }
         .brand-item { text-align: center; cursor: pointer; flex: 1; transition: 0.3s; }
-        .brand-item i { font-size: 20px; display: block; margin-bottom: 4px; color: #555; }
-        .brand-item span { font-size: 10px; font-weight: bold; color: #555; text-transform: uppercase; }
+        .brand-item i { font-size: 18px; display: block; margin-bottom: 4px; color: #555; }
+        .brand-item span { font-size: 9px; font-weight: bold; color: #555; text-transform: uppercase; }
         .brand-item.active i, .brand-item.active span { color: var(--gold); }
 
-        /* Kart we Baha dizaýny */
         .container { padding: 12px; }
         .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #222; margin-bottom: 25px; }
-        .swiper { width: 100%; height: 320px; background: #000; } /* Surat ýok bolsa gara durar */
+        .swiper { width: 100%; height: 320px; background: #000; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
         
         .info { padding: 18px; }
-        .model-name { font-size: 20px; font-weight: 800; margin-bottom: 5px; }
+        .model-name { font-size: 19px; font-weight: 800; margin-bottom: 5px; }
         .specs { color: #888; font-size: 13px; margin-bottom: 15px; min-height: 40px; }
         
         .price-row { display: flex; flex-direction: column; margin-bottom: 15px; }
@@ -68,9 +67,9 @@
 <body>
 
     <div id="offline-overlay">
-        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-triangle-exclamation"></i>
         <h2 id="off-title">Internet ýok</h2>
-        <p id="off-desc">Programmany ulanmak üçin internete birigiň.</p>
+        <p id="off-desc">Dowam etmek üçin internete birigiň.</p>
     </div>
 
     <div class="lang-bar">
@@ -80,7 +79,7 @@
         <button onclick="changeLang('en')" id="btn-en">EN</button>
     </div>
     
-    <header><h1 id="main-title">Kargo Mobile</h1></header>
+    <header><h1>Kargo Mobile</h1></header>
 
     <div class="brand-nav">
         <div class="brand-item active" onclick="setFilter('all', this)">
@@ -104,24 +103,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const phoneWA = "99361234567"; // Öz belgiňi ýaz
+        const phoneWA = "99361234567";
 
         const translations = {
-            tm: { all: "Hemmesi", other: "Beýleki", buy: "Sargyt et", offT: "Internet ýok", offD: "Programmany ulanmak üçin internete birigiň.", msg: "Salam, sargyt etmek isleýärin: " },
-            tr: { all: "Hepsi", other: "Diğer", buy: "Sipariş Ver", offT: "İnternet Yok", offD: "Uygulamayı kullanmak için internete bağlanın.", msg: "Merhaba, sipariş vermek istiyorum: " },
-            ru: { all: "Все", other: "Прочее", buy: "Заказать", offT: "Нет интернета", offD: "Подключитесь к интернету для работы.", msg: "Здравствуйте, хочу заказать: " },
-            en: { all: "All", other: "Other", buy: "Order", offT: "No Internet", offD: "Please connect to internet to use app.", msg: "Hello, I want to order: " }
+            tm: { all: "Hemmesi", other: "Beýleki", buy: "Sargyt et", offT: "Internet ýok", offD: "Internet baglanyşygyňyzy barlaň.", msg: "Salam, sargyt etmek isleýärin: " },
+            tr: { all: "Hepsi", other: "Diğer", buy: "Sipariş Ver", offT: "İnternet Yok", offD: "İnternet bağlantınızı kontrol edin.", msg: "Merhaba, sipariş vermek istiyorum: " },
+            ru: { all: "Все", other: "Прочее", buy: "Заказать", offT: "Нет интернета", offD: "Проверьте подключение к интернету.", msg: "Здравствуйте, хочу заказать: " },
+            en: { all: "All", other: "Other", buy: "Order", offT: "No Internet", offD: "Please check your internet connection.", msg: "Hello, I want to order: " }
         };
 
+        // SENIŇ ÄHLI MODELLERIŇ WE TÄZE GOŞULANLAR:
         const products = [
-            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | 1 SIM | Aktiv", price: "1,300$ (59,150 TL)", images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp"] },
+            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | 1 SIM | Aktiv", price: "1,300$ (59,150 TL)", images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp", "surat5.webp", "surat6.webp", "surat7.webp"] },
             { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | 1 SIM | Täze", price: "1,405$ (63,927 TL)", images: ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"] },
-            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray, Blue | Täze", price: "920$ (41,860 TL)", images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] },
-            { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Täze | Foldable", price: "440$ (20,020 TL)", images: ["zeroflip_1.jpg", "zeroflip_2.jpg", "zeroflip_3.jpg", "zeroflip_4.jpg"] },
-            { name: "Redmi Note 15 Pro", brand: "Other", specs: "8/256GB | Täze | Pro Performance", price: "280$ (12,740 TL)", images: ["note15pro_1.jpg", "note15pro_2.jpg", "note15pro_3.jpg", "note15pro_4.jpg"] },
+            { name: "iPhone 17 Pro Orange", brand: "iPhone", specs: "256GB | Orange | 1 SIM | Täze", price: "1,300$ (59,150 TL)", images: ["orange1.jpg", "orange2.jpg", "orange3.jpg", "orange4.jpg"] },
+            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray, Blue, Black | Täze", price: "920$ (41,860 TL)", images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] },
+            { name: "Samsung S24", brand: "Samsung", specs: "Black | Täze | Iki görnüşli ýat", price: "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)", images: ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg", "s24_4.jpg"] },
+            { name: "Infinix GT 30 Pro", brand: "Infinix", specs: "12/256GB | Gaming Edition | 5G | Täze", price: "325$ (14,787 TL)", images: ["gt30_1.jpg", "gt30_2.jpg", "gt30_3.jpg", "gt30_4.jpg"] },
             { name: "Samsung A26", brand: "Samsung", specs: "6/128GB | Täze | Netijeli Model", price: "215$ (9,782 TL)", images: ["a26_1.jpg", "a26_2.jpg", "a26_3.jpg", "a26_4.jpg"] },
-            { name: "Samsung A16", brand: "Samsung", specs: "8/256GB | Täze | Gara, Ýaşyl", price: "200$ (9,100 TL)", images: ["a16_1.jpg", "a16_2.jpg", "a16_3.jpg", "a16_4.jpg"] }
-            // Täze goşjak modelleriňi şu aşakdan dowam etdirip bilersiň...
+            { name: "Samsung A17", brand: "Samsung", specs: "Täze | Iki görnüşli ýat", price: "4/128GB: 173$ (7,871 TL) <br> 6/128GB: 185$ (8,417 TL)", images: ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"] },
+            { name: "Samsung A16", brand: "Samsung", specs: "8/256GB | Täze | Gara, Ýaşyl", price: "200$ (9,100 TL)", images: ["a16_1.jpg", "a16_2.jpg", "a16_3.jpg", "a16_4.jpg", "a16_5.jpg", "a16_6.jpg"] },
+            { name: "Samsung A07", brand: "Samsung", specs: "4/64GB | Täze | Amatly baha", price: "162$ (7,371 TL)", images: ["a07_1.jpg", "a07_2.jpg", "a07_3.jpg", "a07_4.jpg"] },
+            { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Täze | Foldable", price: "440$ (20,020 TL)", images: ["zf_1.jpg", "zf_2.jpg", "zf_3.jpg", "zf_4.jpg"] },
+            { name: "Redmi Note 15 Pro", brand: "Other", specs: "8/256GB | Täze | Pro Performance", price: "280$ (12,740 TL)", images: ["r15p_1.jpg", "r15p_2.jpg", "r15p_3.jpg", "r15p_4.jpg"] }
         ];
 
         let currentLang = 'tm';
@@ -141,12 +145,10 @@
             currentLang = lang;
             document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
-            
             document.getElementById('t-all').innerText = translations[lang].all;
             document.getElementById('t-other').innerText = translations[lang].other;
             document.getElementById('off-title').innerText = translations[lang].offT;
             document.getElementById('off-desc').innerText = translations[lang].offD;
-            
             renderProducts(activeFilter);
         }
 
@@ -160,14 +162,12 @@
         function renderProducts(filter = 'all') {
             const list = document.getElementById('product-list');
             list.innerHTML = '';
-            
             const filtered = filter === 'all' ? products : products.filter(p => p.brand === filter);
             
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 
-                // Bahany Dollar we TL aýyrmak (Skobkanyň içindäkini TL edýär)
                 let priceParts = p.price.split('(');
                 let usdPart = priceParts[0].trim();
                 let tlPart = priceParts[1] ? '(' + priceParts[1] : '';
@@ -186,16 +186,10 @@
                         <a href="https://wa.me/${phoneWA}?text=${translations[currentLang].msg}${p.name} - ${usdPart}" class="buy-btn">
                             <i class="fa-brands fa-whatsapp"></i> ${translations[currentLang].buy}
                         </a>
-                    </div>
-                `;
+                    </div>`;
                 list.appendChild(card);
             });
-
-            new Swiper(".mySwiper", { 
-                pagination: { el: ".swiper-pagination", clickable: true },
-                observer: true,
-                observeParents: true
-            });
+            new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", clickable: true }, observer: true, observeParents: true });
         }
 
         renderProducts();
