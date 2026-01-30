@@ -3,114 +3,180 @@
     "name": "iPhone 17 Pro",
     "specs": "256GB | Silver | 1 SIM | Aktiv",
     "price": "1,300$ (59,150 TL)",
-    "images": [
-      "shopping.webp",
-      "surat2.webp",
-      "surat3.webp",
-      "surat4.webp",
-      "surat5.webp",
-      "surat6.webp",
-      "surat7.webp"
-    ]
+    "images": ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp", "surat5.webp", "surat6.webp", "surat7.webp"]
   },
   {
     "name": "iPhone 17 Pro Max",
     "specs": "256GB | Blue | 1 SIM | Täze",
     "price": "1,405$ (63,927 TL)",
-    "images": [
-      "max1.jpg",
-      "max2.jpg",
-      "max3.jpg",
-      "max4.jpg"
-    ]
+    "images": ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"]
   },
   {
     "name": "iPhone 17 Pro Orange",
     "specs": "256GB | Orange | 1 SIM | Täze",
     "price": "1,300$ (59,150 TL)",
-    "images": [
-      "orange1.jpg",
-      "orange2.jpg",
-      "orange3.jpg",
-      "orange4.jpg"
-    ]
-  },
-  {
-    "name": "Samsung S24",
-    "specs": "Black | Täze | Iki görnüşli ýat",
-    "price": "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)",
-    "images": [
-      "s24_1.jpg",
-      "s24_2.jpg",
-      "s24_3.jpg"
-    ]
+    "images": ["orange1.jpg", "orange2.jpg", "orange3.jpg", "orange4.jpg"]
   },
   {
     "name": "Samsung S25 Ultra",
     "specs": "12/256GB | Gray, Blue, Black | Täze",
     "price": "920$ (41,860 TL)",
-    "images": [
-      "s25u_1.jpg",
-      "s25u_2.jpg",
-      "s25u_3.jpg",
-      "s25u_4.jpg"
-    ]
+    "images": ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"]
   },
   {
-    "name": "Infinix GT 30 Pro",
-    "specs": "12/256GB | Gaming Edition | 5G | Täze",
-    "price": "325$ (14,787 TL)",
-    "images": [
-      "gt30_1.jpg",
-      "gt30_2.jpg",
-      "gt30_3.jpg",
-      "gt30_4.jpg"
-    ]
+    "name": "Samsung S24",
+    "specs": "Black | Täze | Iki görnüşli ýat",
+    "price": "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)",
+    "images": ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg"]
+  },
+  {
+    "name": "Infinix Zero Flip",
+    "specs": "16/512GB | Täze | Foldable Display",
+    "price": "440$ (20,020 TL)",
+    "images": ["zeroflip_1.jpg", "zeroflip_2.jpg", "zeroflip_3.jpg", "zeroflip_4.jpg"]
+  },
+  {
+    "name": "Infinix Zero 30 5G",
+    "specs": "12/256GB | Täze | 4K 60FPS Video",
+    "price": "305$ (13,877 TL)",
+    "images": ["zero30_1.jpg", "zero30_2.jpg", "zero30_3.jpg", "zero30_4.jpg"]
+  },
+  {
+    "name": "Redmi Note 15 Pro",
+    "specs": "8/256GB | Täze | Pro Performance",
+    "price": "280$ (12,740 TL)",
+    "images": ["note15pro_1.jpg", "note15pro_2.jpg", "note15pro_3.jpg", "note15pro_4.jpg"]
+  },
+  {
+    "name": "Infinix Note 50 Pro",
+    "specs": "12/256GB | Täze | High Performance",
+    "price": "265$ (12,058 TL)",
+    "images": ["note50pro_1.jpg", "note50pro_2.jpg", "note50pro_3.jpg", "note50pro_4.jpg"]
+  },
+  {
+    "name": "Infinix Note 50S",
+    "specs": "8/256GB | Grey | Täze | Premium Model",
+    "price": "260$ (11,830 TL)",
+    "images": ["note50s_1.jpg", "note50s_2.jpg", "note50s_3.jpg", "note50s_4.jpg"]
+  },
+  {
+    "name": "Tecno Camon 40 Pro",
+    "specs": "8/256GB | Täze | Professional Camera",
+    "price": "250$ (11,375 TL)",
+    "images": ["camon40pro_1.jpg", "camon40pro_2.jpg", "camon40pro_3.jpg", "camon40pro_4.jpg"]
+  },
+  {
+    "name": "Infinix Note 40 Pro",
+    "specs": "8/256GB | Täze | 70W Fast Charge",
+    "price": "250$ (11,375 TL)",
+    "images": ["note40pro_1.jpg", "note40pro_2.jpg", "note40pro_3.jpg", "note40pro_4.jpg"]
+  },
+  {
+    "name": "Infinix Note 50",
+    "specs": "8/256GB | Täze | Standart Edition",
+    "price": "232$ (10,556 TL)",
+    "images": ["note50_1.jpg", "note50_2.jpg", "note50_3.jpg", "note50_4.jpg"]
+  },
+  {
+    "name": "Infinix Zero 40",
+    "specs": "8/256GB | Täze | 144Hz AMOLED",
+    "price": "232$ (10,556 TL)",
+    "images": ["zero40_1.jpg", "zero40_2.jpg", "zero40_3.jpg", "zero40_4.jpg"]
+  },
+  {
+    "name": "Redmi Note 15",
+    "specs": "8/256GB | Täze | Global Version",
+    "price": "225$ (10,237 TL)",
+    "images": ["note15_1.jpg", "note15_2.jpg", "note15_3.jpg", "note15_4.jpg"]
+  },
+  {
+    "name": "Infinix Hot 60 Pro+",
+    "specs": "8/256GB | Täze | Dynamic Design",
+    "price": "220$ (10,010 TL)",
+    "images": ["hot60pro+_1.jpg", "hot60pro+_2.jpg", "hot60pro+_3.jpg", "hot60pro+_4.jpg"]
+  },
+  {
+    "name": "Samsung A56",
+    "specs": "8/128GB | Täze | Gara, Ak, Benewşe",
+    "price": "313$ (14,241 TL)",
+    "images": ["a56_1.jpg", "a56_2.jpg", "a56_3.jpg", "a56_4.jpg"]
+  },
+  {
+    "name": "Samsung A36",
+    "specs": "8/128GB | Täze | Gara, Ak, Benewşe",
+    "price": "260$ (11,830 TL)",
+    "images": ["a36_1.jpg", "a36_2.jpg", "a36_3.jpg", "a36_4.jpg"]
   },
   {
     "name": "Samsung A26",
     "specs": "6/128GB | Täze | Netijeli Model",
     "price": "215$ (9,782 TL)",
-    "images": [
-      "a26_1.jpg",
-      "a26_2.jpg",
-      "a26_3.jpg",
-      "a26_4.jpg"
-    ]
+    "images": ["a26_1.jpg", "a26_2.jpg", "a26_3.jpg", "a26_4.jpg"]
+  },
+  {
+    "name": "Infinix X Pad 20",
+    "specs": "4/128GB | Täze | Tablet Edition",
+    "price": "175$ (7,963 TL)",
+    "images": ["xpad20_1.jpg", "xpad20_2.jpg", "xpad20_3.jpg", "xpad20_4.jpg"]
   },
   {
     "name": "Samsung A17",
     "specs": "Täze | Iki görnüşli ýat",
     "price": "4/128GB: 173$ (7,871 TL) <br> 6/128GB: 185$ (8,417 TL)",
-    "images": [
-      "a17_1.jpg",
-      "a17_2.jpg",
-      "a17_3.jpg",
-      "a17_4.jpg"
-    ]
+    "images": ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"]
   },
   {
     "name": "Samsung A16",
     "specs": "8/256GB | Täze | Gara, Ýaşyl, Çüýşebendi",
     "price": "200$ (9,100 TL)",
-    "images": [
-      "a16_1.jpg",
-      "a16_2.jpg",
-      "a16_3.jpg",
-      "a16_4.jpg",
-      "a16_5.jpg",
-      "a16_6.jpg"
-    ]
+    "images": ["a16_1.jpg", "a16_2.jpg", "a16_3.jpg", "a16_4.jpg", "a16_5.jpg", "a16_6.jpg"]
   },
   {
     "name": "Samsung A07",
     "specs": "4/64GB | Täze | Amatly baha",
     "price": "162$ (7,371 TL)",
-    "images": [
-      "a07_1.jpg",
-      "a07_2.jpg",
-      "a07_3.jpg",
-      "a07_4.jpg"
-    ]
+    "images": ["a07_1.jpg", "a07_2.jpg", "a07_3.jpg", "a07_4.jpg"]
+  },
+  {
+    "name": "Infinix Hot 60i",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "4/128GB: 132$ (6,006 TL) <br> 4/256GB: 150$ (6,825 TL)",
+    "images": ["hot60i_1.jpg", "hot60i_2.jpg", "hot60i_3.jpg", "hot60i_4.jpg"]
+  },
+  {
+    "name": "Infinix Hot 40i",
+    "specs": "8/128GB | Täze | Gara, Altyn, Gök",
+    "price": "145$ (6,597 TL)",
+    "images": ["hot40i_1.jpg", "hot40i_2.jpg", "hot40i_3.jpg", "hot40i_4.jpg"]
+  },
+  {
+    "name": "Infinix Smart 10",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "3/64GB: 105$ (4,777 TL) <br> 4/128GB: 115$ (5,232 TL)",
+    "images": ["smart10_1.jpg", "smart10_2.jpg", "smart10_3.jpg", "smart10_4.jpg"]
+  },
+  {
+    "name": "Infinix Smart 10 HD",
+    "specs": "3/64GB | Täze | Ak, Gara, Gök",
+    "price": "100$ (4,550 TL)",
+    "images": ["smart10hd_1.jpg", "smart10hd_2.jpg", "smart10hd_3.jpg", "smart10hd_4.jpg"]
+  },
+  {
+    "name": "Infinix Smart 8 Pro",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "4/64GB: 107$ (4,869 TL) <br> 4/128GB: 120$ (5,460 TL)",
+    "images": ["smart8pro_1.jpg", "smart8pro_2.jpg", "smart8pro_3.jpg", "smart8pro_4.jpg"]
+  },
+  {
+    "name": "Infinix Smart 8",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "2/64GB: 93$ (4,232 TL) <br> 4/64GB: 107$ (4,869 TL)",
+    "images": ["smart8_1.jpg", "smart8_2.jpg", "smart8_3.jpg", "smart8_4.jpg"]
+  },
+  {
+    "name": "Infinix GT 30 Pro",
+    "specs": "12/256GB | Gaming Edition | 5G | Täze",
+    "price": "325$ (14,787 TL)",
+    "images": ["gt30_1.jpg", "gt30_2.jpg", "gt30_3.jpg", "gt30_4.jpg"]
   }
 ]
