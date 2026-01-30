@@ -48,6 +48,12 @@
     "images": ["zeroflip_1.jpg", "zeroflip_2.jpg", "zeroflip_3.jpg", "zeroflip_4.jpg"]
   },
   {
+    "name": "Infinix Zero 40",
+    "specs": "8/256GB | Curved Screen | Täze",
+    "price": "340$ (15,470 TL)",
+    "images": ["zero40_1.jpg", "zero40_2.jpg"]
+  },
+  {
     "name": "Infinix Zero 30 5G",
     "specs": "12/256GB | Täze | 4K 60FPS Video",
     "price": "305$ (13,877 TL)",
@@ -66,6 +72,12 @@
     "images": ["note50pro_1.jpg", "note50pro_2.jpg", "note50pro_3.jpg", "note50pro_4.jpg"]
   },
   {
+    "name": "Infinix Note 50",
+    "specs": "8/256GB | Täze | Ortaça baha",
+    "price": "187$ (8,508 TL)",
+    "images": ["note50_1.jpg", "note50_2.jpg"]
+  },
+  {
     "name": "Infinix Note 50S",
     "specs": "8/256GB | Grey | Täze | Premium Model",
     "price": "260$ (11,830 TL)",
@@ -82,6 +94,24 @@
     "specs": "8/256GB | Täze | 70W Fast Charge",
     "price": "250$ (11,375 TL)",
     "images": ["note40pro_1.jpg", "note40pro_2.jpg", "note40pro_3.jpg", "note40pro_4.jpg"]
+  },
+  {
+    "name": "Infinix Hot 60 Pro+",
+    "specs": "8/256GB | Täze | High Speed",
+    "price": "195$ (8,872 TL)",
+    "images": ["hot60pp_1.jpg", "hot60pp_2.jpg"]
+  },
+  {
+    "name": "Infinix Hot 60i",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "4/128GB: 132$ (6,006 TL) <br> 4/256GB: 150$ (6,825 TL)",
+    "images": ["hot60i_1.jpg", "hot60i_2.jpg", "hot60i_3.jpg", "hot60i_4.jpg"]
+  },
+  {
+    "name": "Infinix Hot 40i",
+    "specs": "8/128GB | Täze | Amatly",
+    "price": "145$ (6,597 TL)",
+    "images": ["hot40i_1.jpg", "hot40i_2.jpg"]
   },
   {
     "name": "Samsung A56",
@@ -120,15 +150,33 @@
     "images": ["a07_1.jpg", "a07_2.jpg", "a07_3.jpg", "a07_4.jpg"]
   },
   {
-    "name": "Infinix Hot 60i",
-    "specs": "Täze | Iki görnüşli ýat",
-    "price": "4/128GB: 132$ (6,006 TL) <br> 4/256GB: 150$ (6,825 TL)",
-    "images": ["hot60i_1.jpg", "hot60i_2.jpg", "hot60i_3.jpg", "hot60i_4.jpg"]
+    "name": "Infinix Smart 10 Plus",
+    "specs": "4/128GB | Täze Model",
+    "price": "135$ (6,142 TL)",
+    "images": ["s10p_1.jpg", "s10p_2.jpg"]
   },
   {
     "name": "Infinix Smart 10",
-    "specs": "Täze | Iki görnüşli ýat",
-    "price": "3/64GB: 105$ (4,777 TL) <br> 4/128GB: 115$ (5,232 TL)",
+    "specs": "Täze | Üç görnüşli ýat",
+    "price": "3/64GB: 105$ (4,777 TL) <br> 3/64GB (HD): 110$ (5,005 TL) <br> 4/128GB: 125$ (5,687 TL)",
     "images": ["smart10_1.jpg", "smart10_2.jpg", "smart10_3.jpg", "smart10_4.jpg"]
+  },
+  {
+    "name": "Infinix Smart 8 Pro",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "4/64GB: 110$ (5,005 TL) <br> 4/128GB: 120$ (5,460 TL)",
+    "images": ["s8p_1.jpg", "s8p_2.jpg"]
+  },
+  {
+    "name": "Infinix Smart 8",
+    "specs": "Täze | Iki görnüşli ýat",
+    "price": "2/64GB: 95$ (4,322 TL) <br> 4/64GB: 105$ (4,777 TL)",
+    "images": ["s8_1.jpg", "s8_2.jpg"]
+  },
+  {
+    "name": "Infinix X Pad 20",
+    "specs": "4/128GB | Täze Tablet",
+    "price": "180$ (8,190 TL)",
+    "images": ["xpad_1.jpg", "xpad_2.jpg"]
   }
 ]
