@@ -8,22 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root { --gold: #f1c40f; --dark-bg: #0c0c0c; --card-bg: #161616; --text-white: #ffffff; }
-        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: 30px; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: 30px; }
 
-        #offline-overlay { 
-            display: none; position: fixed; inset: 0; background: #000; 
-            z-index: 10000; flex-direction: column; align-items: center; 
-            justify-content: center; text-align: center; padding: 20px;
-        }
+        #offline-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
         #offline-overlay i { font-size: 70px; color: var(--gold); margin-bottom: 20px; }
 
-        .lang-bar { 
-            padding-top: calc(env(safe-area-inset-top) + 10px);
-            background: #000; padding-bottom: 12px; display: flex; 
-            justify-content: center; gap: 8px; border-bottom: 1px solid #222;
-        }
+        .lang-bar { padding-top: calc(env(safe-area-inset-top) + 10px); background: #000; padding-bottom: 12px; display: flex; justify-content: center; gap: 8px; border-bottom: 1px solid #222; }
         .lang-bar button { background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 6px 12px; border-radius: 8px; font-size: 12px; }
-        .lang-bar button.active { background: var(--gold); color: #000; font-weight: bold; border-color: var(--gold); }
+        .lang-bar button.active { background: var(--gold); color: #000; font-weight: bold; }
 
         header { padding: 15px 20px; text-align: center; }
         header h1 { margin: 0; font-size: 24px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
@@ -43,27 +35,18 @@
         .model-name { font-size: 19px; font-weight: 800; margin-bottom: 5px; }
         .specs { color: #888; font-size: 13px; margin-bottom: 15px; }
         
-        /* Iki baha bolanda deň durar ýaly dizaýn */
-        .price-section { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid #222; pt: 15px; margin-top: 10px; }
+        .price-section { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; border-top: 1px solid #222; padding-top: 15px; }
         .price-item { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 10px; border-radius: 12px; }
         .price-text { display: flex; flex-direction: column; }
-        .price-val { font-size: 18px; color: var(--gold); font-weight: 900; }
-        .price-tl { font-size: 13px; color: #777; font-weight: 500; }
+        .price-val { font-size: 17px; color: var(--gold); font-weight: 900; }
+        .price-tl { font-size: 12px; color: #777; font-weight: 500; }
 
-        .buy-btn-small { 
-            background: var(--gold); color: #000; text-decoration: none; 
-            padding: 8px 12px; border-radius: 8px; font-weight: 900; font-size: 12px; 
-            display: flex; align-items: center; gap: 5px; text-transform: uppercase;
-        }
+        .buy-btn-small { background: var(--gold); color: #000; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-weight: 900; font-size: 11px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-    <div id="offline-overlay">
-        <i class="fa-solid fa-wifi"></i>
-        <h2 id="off-title">Internet ýok</h2>
-        <p id="off-desc">Dowam etmek üçin internete birigiň.</p>
-    </div>
+    <div id="offline-overlay"><i class="fa-solid fa-wifi"></i><h2 id="off-title">Internet ýok</h2></div>
 
     <div class="lang-bar">
         <button onclick="changeLang('tm')" id="btn-tm" class="active">TM</button>
@@ -87,41 +70,37 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const phoneWA = "99361234567";
-
         const translations = {
-            tm: { all: "Hemmesi", other: "Beýleki", buy: "Sargyt", msg: "Salam, sargyt etmek isleýärin: " },
-            tr: { all: "Hepsi", other: "Diğer", buy: "Sipariş", msg: "Merhaba, sipariş vermek istiyorum: " },
-            ru: { all: "Все", other: "Прочее", buy: "Заказ", msg: "Здравствуйте, хочу заказать: " },
-            en: { all: "All", other: "Other", buy: "Order", msg: "Hello, I want to order: " }
+            tm: { all: "Hemmesi", other: "Beýleki", buy: "Sargyt", msg: "Salam, sargyt: " },
+            tr: { all: "Hepsi", other: "Diğer", buy: "Sipariş", msg: "Merhaba, sipariş: " },
+            ru: { all: "Все", other: "Прочее", buy: "Заказ", msg: "Здравствуйте, заказ: " },
+            en: { all: "All", other: "Other", buy: "Order", msg: "Hello, order: " }
         };
 
         const products = [
-            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | 1 SIM", prices: [{label: "256GB", val: "1,300$ (59,150 TL)"}], images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp"] },
-            { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | 1 SIM", prices: [{label: "256GB", val: "1,405$ (63,927 TL)"}], images: ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"] },
-            { name: "Samsung S24", brand: "Samsung", specs: "Black | Täze | Iki görnüşli ýat", 
-              prices: [
-                  {label: "8/128GB", val: "490$ (22,295 TL)"},
-                  {label: "8/256GB", val: "555$ (25,252 TL)"}
-              ], images: ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg", "s24_4.jpg"] },
-            { name: "Samsung A17", brand: "Samsung", specs: "Täze | Iki görnüşli ýat", 
-              prices: [
-                  {label: "4/128GB", val: "173$ (7,871 TL)"},
-                  {label: "6/128GB", val: "185$ (8,417 TL)"}
-              ], images: ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"] },
-            { name: "Infinix Hot 60i", brand: "Infinix", specs: "Täze | Iki görnüşli ýat", 
-              prices: [
-                  {label: "4/128GB", val: "132$ (6,006 TL)"},
-                  {label: "4/256GB", val: "150$ (6,825 TL)"}
-              ], images: ["hot60i_1.jpg", "hot60i_2.jpg", "hot60i_3.jpg", "hot60i_4.jpg"] },
-            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray, Blue", prices: [{label: "12/256GB", val: "920$ (41,860 TL)"}], images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] }
+            // iPhone Modelleri
+            { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | Täze", prices: [{label: "256GB", val: "1,405$ (63,927 TL)"}], images: ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"] },
+            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | Aktiv", prices: [{label: "256GB", val: "1,300$ (59,150 TL)"}], images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp"] },
+            { name: "iPhone 17 Pro Orange", brand: "iPhone", specs: "256GB | Orange | Täze", prices: [{label: "256GB", val: "1,300$ (59,150 TL)"}], images: ["orange1.jpg", "orange2.jpg", "orange3.jpg", "orange4.jpg"] },
+            
+            // Samsung Modelleri (Hemmesi Goşuldy)
+            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Täze", prices: [{label: "12/256GB", val: "920$ (41,860 TL)"}], images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] },
+            { name: "Samsung S24", brand: "Samsung", specs: "Black | Täze", prices: [{label: "8/128GB", val: "490$ (22,295 TL)"}, {label: "8/256GB", val: "555$ (25,252 TL)"}], images: ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg", "s24_4.jpg"] },
+            { name: "Samsung A56", brand: "Samsung", specs: "8/128GB | Täze", prices: [{label: "8/128GB", val: "313$ (14,241 TL)"}], images: ["a56_1.jpg", "a56_2.jpg", "a56_3.jpg", "a56_4.jpg"] },
+            { name: "Samsung A36", brand: "Samsung", specs: "8/128GB | Täze", prices: [{label: "8/128GB", val: "260$ (11,830 TL)"}], images: ["a36_1.jpg", "a36_2.jpg", "a36_3.jpg", "a36_4.jpg"] },
+            { name: "Samsung A26", brand: "Samsung", specs: "6/128GB | Täze", prices: [{label: "6/128GB", val: "215$ (9,782 TL)"}], images: ["a26_1.jpg", "a26_2.jpg", "a26_3.jpg", "a26_4.jpg"] },
+            { name: "Samsung A17", brand: "Samsung", specs: "Täze | 2 Görnüş", prices: [{label: "4/128GB", val: "173$ (7,871 TL)"}, {label: "6/128GB", val: "185$ (8,417 TL)"}], images: ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"] },
+            { name: "Samsung A16", brand: "Samsung", specs: "8/256GB | Täze", prices: [{label: "8/256GB", val: "200$ (9,100 TL)"}], images: ["a16_1.jpg", "a16_2.jpg", "a16_3.jpg", "a16_4.jpg"] },
+            { name: "Samsung A07", brand: "Samsung", specs: "4/64GB | Täze", prices: [{label: "4/64GB", val: "162$ (7,371 TL)"}], images: ["a07_1.jpg", "a07_2.jpg", "a07_3.jpg", "a07_4.jpg"] },
+            
+            // Infinix Modelleri
+            { name: "Infinix GT 30 Pro", brand: "Infinix", specs: "12/256GB | Gaming", prices: [{label: "12/256GB", val: "325$ (14,787 TL)"}], images: ["gt30_1.jpg", "gt30_2.jpg", "gt30_3.jpg", "gt30_4.jpg"] },
+            { name: "Infinix Hot 60i", brand: "Infinix", specs: "Täze | 2 Görnüş", prices: [{label: "4/128GB", val: "132$ (6,006 TL)"}, {label: "4/256GB", val: "150$ (6,825 TL)"}], images: ["hot60i_1.jpg", "hot60i_2.jpg", "hot60i_3.jpg", "hot60i_4.jpg"] }
         ];
 
-        let currentLang = 'tm';
-        let activeFilter = 'all';
+        let currentLang = 'tm'; let activeFilter = 'all';
 
-        function checkInternet() {
-            document.getElementById('offline-overlay').style.display = navigator.onLine ? 'none' : 'flex';
-        }
+        function checkInternet() { document.getElementById('offline-overlay').style.display = navigator.onLine ? 'none' : 'flex'; }
         window.addEventListener('online', checkInternet); window.addEventListener('offline', checkInternet);
         checkInternet();
 
@@ -158,7 +137,7 @@
                     return `
                     <div class="price-item">
                         <div class="price-text">
-                            <span style="font-size:11px; color:#888;">${pr.label}</span>
+                            <span style="font-size:10px; color:#aaa;">${pr.label}</span>
                             <span class="price-val">${usd}</span>
                             <span class="price-tl">${tl}</span>
                         </div>
