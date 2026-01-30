@@ -10,7 +10,6 @@
         :root { --gold: #f1c40f; --dark-bg: #0c0c0c; --card-bg: #161616; --text-white: #ffffff; }
         body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: 30px; overflow-x: hidden; }
 
-        /* Internet Kesilse Programma Bloklanýar */
         #offline-overlay { 
             display: none; position: fixed; inset: 0; background: #000; 
             z-index: 10000; flex-direction: column; align-items: center; 
@@ -18,30 +17,21 @@
         }
         #offline-overlay i { font-size: 70px; color: var(--gold); margin-bottom: 20px; }
 
-        /* Diller (Kameranyň aşagynda) */
         .lang-bar { 
             padding-top: calc(env(safe-area-inset-top) + 10px);
             background: #000; padding-bottom: 12px; display: flex; 
             justify-content: center; gap: 8px; border-bottom: 1px solid #222;
         }
-        .lang-bar button { 
-            background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 6px 12px; 
-            border-radius: 8px; font-size: 12px; cursor: pointer;
-        }
-        .lang-bar button.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: bold; }
+        .lang-bar button { background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 6px 12px; border-radius: 8px; font-size: 12px; }
+        .lang-bar button.active { background: var(--gold); color: #000; font-weight: bold; border-color: var(--gold); }
 
         header { padding: 15px 20px; text-align: center; }
         header h1 { margin: 0; font-size: 24px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Brendler Ekrana Sygyşýan dizaýn */
-        .brand-nav { 
-            display: flex; justify-content: space-around; align-items: center;
-            padding: 10px 5px; background: #0c0c0c; border-bottom: 1px solid #1a1a1a;
-            position: sticky; top: 0; z-index: 999;
-        }
-        .brand-item { text-align: center; cursor: pointer; flex: 1; transition: 0.3s; }
+        .brand-nav { display: flex; justify-content: space-around; padding: 10px 5px; background: #0c0c0c; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 999; }
+        .brand-item { text-align: center; cursor: pointer; flex: 1; }
         .brand-item i { font-size: 18px; display: block; margin-bottom: 4px; color: #555; }
-        .brand-item span { font-size: 9px; font-weight: bold; color: #555; text-transform: uppercase; }
+        .brand-item span { font-size: 9px; font-weight: bold; color: #555; }
         .brand-item.active i, .brand-item.active span { color: var(--gold); }
 
         .container { padding: 12px; }
@@ -51,23 +41,26 @@
         
         .info { padding: 18px; }
         .model-name { font-size: 19px; font-weight: 800; margin-bottom: 5px; }
-        .specs { color: #888; font-size: 13px; margin-bottom: 15px; min-height: 40px; }
+        .specs { color: #888; font-size: 13px; margin-bottom: 15px; }
         
-        .price-row { display: flex; flex-direction: column; margin-bottom: 15px; }
-        .price-val { font-size: 22px; color: var(--gold); font-weight: 900; }
-        .price-tl { font-size: 15px; color: #777; font-weight: 500; }
+        /* Iki baha bolanda deň durar ýaly dizaýn */
+        .price-section { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid #222; pt: 15px; margin-top: 10px; }
+        .price-item { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 10px; border-radius: 12px; }
+        .price-text { display: flex; flex-direction: column; }
+        .price-val { font-size: 18px; color: var(--gold); font-weight: 900; }
+        .price-tl { font-size: 13px; color: #777; font-weight: 500; }
 
-        .buy-btn { 
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: var(--gold); color: #000; text-decoration: none; padding: 15px; 
-            border-radius: 12px; font-weight: 900; font-size: 14px; text-transform: uppercase;
+        .buy-btn-small { 
+            background: var(--gold); color: #000; text-decoration: none; 
+            padding: 8px 12px; border-radius: 8px; font-weight: 900; font-size: 12px; 
+            display: flex; align-items: center; gap: 5px; text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
     <div id="offline-overlay">
-        <i class="fa-solid fa-triangle-exclamation"></i>
+        <i class="fa-solid fa-wifi"></i>
         <h2 id="off-title">Internet ýok</h2>
         <p id="off-desc">Dowam etmek üçin internete birigiň.</p>
     </div>
@@ -82,21 +75,11 @@
     <header><h1>Kargo Mobile</h1></header>
 
     <div class="brand-nav">
-        <div class="brand-item active" onclick="setFilter('all', this)">
-            <i class="fa-solid fa-border-all"></i><span id="t-all">Hemmesi</span>
-        </div>
-        <div class="brand-item" onclick="setFilter('iPhone', this)">
-            <i class="fa-brands fa-apple"></i><span>iPhone</span>
-        </div>
-        <div class="brand-item" onclick="setFilter('Samsung', this)">
-            <i class="fa-solid fa-mobile-screen"></i><span>Samsung</span>
-        </div>
-        <div class="brand-item" onclick="setFilter('Infinix', this)">
-            <i class="fa-solid fa-bolt"></i><span>Infinix</span>
-        </div>
-        <div class="brand-item" onclick="setFilter('Other', this)">
-            <i class="fa-solid fa-ellipsis"></i><span id="t-other">Beýleki</span>
-        </div>
+        <div class="brand-item active" onclick="setFilter('all', this)"><i class="fa-solid fa-border-all"></i><span id="t-all">Hemmesi</span></div>
+        <div class="brand-item" onclick="setFilter('iPhone', this)"><i class="fa-brands fa-apple"></i><span>iPhone</span></div>
+        <div class="brand-item" onclick="setFilter('Samsung', this)"><i class="fa-solid fa-mobile-screen"></i><span>Samsung</span></div>
+        <div class="brand-item" onclick="setFilter('Infinix', this)"><i class="fa-solid fa-bolt"></i><span>Infinix</span></div>
+        <div class="brand-item" onclick="setFilter('Other', this)"><i class="fa-solid fa-ellipsis"></i><span id="t-other">Beýleki</span></div>
     </div>
 
     <div class="container" id="product-list"></div>
@@ -106,39 +89,40 @@
         const phoneWA = "99361234567";
 
         const translations = {
-            tm: { all: "Hemmesi", other: "Beýleki", buy: "Sargyt et", offT: "Internet ýok", offD: "Internet baglanyşygyňyzy barlaň.", msg: "Salam, sargyt etmek isleýärin: " },
-            tr: { all: "Hepsi", other: "Diğer", buy: "Sipariş Ver", offT: "İnternet Yok", offD: "İnternet bağlantınızı kontrol edin.", msg: "Merhaba, sipariş vermek istiyorum: " },
-            ru: { all: "Все", other: "Прочее", buy: "Заказать", offT: "Нет интернета", offD: "Проверьте подключение к интернету.", msg: "Здравствуйте, хочу заказать: " },
-            en: { all: "All", other: "Other", buy: "Order", offT: "No Internet", offD: "Please check your internet connection.", msg: "Hello, I want to order: " }
+            tm: { all: "Hemmesi", other: "Beýleki", buy: "Sargyt", msg: "Salam, sargyt etmek isleýärin: " },
+            tr: { all: "Hepsi", other: "Diğer", buy: "Sipariş", msg: "Merhaba, sipariş vermek istiyorum: " },
+            ru: { all: "Все", other: "Прочее", buy: "Заказ", msg: "Здравствуйте, хочу заказать: " },
+            en: { all: "All", other: "Other", buy: "Order", msg: "Hello, I want to order: " }
         };
 
-        // SENIŇ ÄHLI MODELLERIŇ WE TÄZE GOŞULANLAR:
         const products = [
-            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | 1 SIM | Aktiv", price: "1,300$ (59,150 TL)", images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp", "surat5.webp", "surat6.webp", "surat7.webp"] },
-            { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | 1 SIM | Täze", price: "1,405$ (63,927 TL)", images: ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"] },
-            { name: "iPhone 17 Pro Orange", brand: "iPhone", specs: "256GB | Orange | 1 SIM | Täze", price: "1,300$ (59,150 TL)", images: ["orange1.jpg", "orange2.jpg", "orange3.jpg", "orange4.jpg"] },
-            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray, Blue, Black | Täze", price: "920$ (41,860 TL)", images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] },
-            { name: "Samsung S24", brand: "Samsung", specs: "Black | Täze | Iki görnüşli ýat", price: "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)", images: ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg", "s24_4.jpg"] },
-            { name: "Infinix GT 30 Pro", brand: "Infinix", specs: "12/256GB | Gaming Edition | 5G | Täze", price: "325$ (14,787 TL)", images: ["gt30_1.jpg", "gt30_2.jpg", "gt30_3.jpg", "gt30_4.jpg"] },
-            { name: "Samsung A26", brand: "Samsung", specs: "6/128GB | Täze | Netijeli Model", price: "215$ (9,782 TL)", images: ["a26_1.jpg", "a26_2.jpg", "a26_3.jpg", "a26_4.jpg"] },
-            { name: "Samsung A17", brand: "Samsung", specs: "Täze | Iki görnüşli ýat", price: "4/128GB: 173$ (7,871 TL) <br> 6/128GB: 185$ (8,417 TL)", images: ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"] },
-            { name: "Samsung A16", brand: "Samsung", specs: "8/256GB | Täze | Gara, Ýaşyl", price: "200$ (9,100 TL)", images: ["a16_1.jpg", "a16_2.jpg", "a16_3.jpg", "a16_4.jpg", "a16_5.jpg", "a16_6.jpg"] },
-            { name: "Samsung A07", brand: "Samsung", specs: "4/64GB | Täze | Amatly baha", price: "162$ (7,371 TL)", images: ["a07_1.jpg", "a07_2.jpg", "a07_3.jpg", "a07_4.jpg"] },
-            { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Täze | Foldable", price: "440$ (20,020 TL)", images: ["zf_1.jpg", "zf_2.jpg", "zf_3.jpg", "zf_4.jpg"] },
-            { name: "Redmi Note 15 Pro", brand: "Other", specs: "8/256GB | Täze | Pro Performance", price: "280$ (12,740 TL)", images: ["r15p_1.jpg", "r15p_2.jpg", "r15p_3.jpg", "r15p_4.jpg"] }
+            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | 1 SIM", prices: [{label: "256GB", val: "1,300$ (59,150 TL)"}], images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp"] },
+            { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | 1 SIM", prices: [{label: "256GB", val: "1,405$ (63,927 TL)"}], images: ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"] },
+            { name: "Samsung S24", brand: "Samsung", specs: "Black | Täze | Iki görnüşli ýat", 
+              prices: [
+                  {label: "8/128GB", val: "490$ (22,295 TL)"},
+                  {label: "8/256GB", val: "555$ (25,252 TL)"}
+              ], images: ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg", "s24_4.jpg"] },
+            { name: "Samsung A17", brand: "Samsung", specs: "Täze | Iki görnüşli ýat", 
+              prices: [
+                  {label: "4/128GB", val: "173$ (7,871 TL)"},
+                  {label: "6/128GB", val: "185$ (8,417 TL)"}
+              ], images: ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"] },
+            { name: "Infinix Hot 60i", brand: "Infinix", specs: "Täze | Iki görnüşli ýat", 
+              prices: [
+                  {label: "4/128GB", val: "132$ (6,006 TL)"},
+                  {label: "4/256GB", val: "150$ (6,825 TL)"}
+              ], images: ["hot60i_1.jpg", "hot60i_2.jpg", "hot60i_3.jpg", "hot60i_4.jpg"] },
+            { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Gray, Blue", prices: [{label: "12/256GB", val: "920$ (41,860 TL)"}], images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] }
         ];
 
         let currentLang = 'tm';
         let activeFilter = 'all';
 
         function checkInternet() {
-            const overlay = document.getElementById('offline-overlay');
-            if (!navigator.onLine) overlay.style.display = 'flex';
-            else overlay.style.display = 'none';
+            document.getElementById('offline-overlay').style.display = navigator.onLine ? 'none' : 'flex';
         }
-
-        window.addEventListener('online', checkInternet);
-        window.addEventListener('offline', checkInternet);
+        window.addEventListener('online', checkInternet); window.addEventListener('offline', checkInternet);
         checkInternet();
 
         function changeLang(lang) {
@@ -147,8 +131,6 @@
             document.getElementById('btn-' + lang).classList.add('active');
             document.getElementById('t-all').innerText = translations[lang].all;
             document.getElementById('t-other').innerText = translations[lang].other;
-            document.getElementById('off-title').innerText = translations[lang].offT;
-            document.getElementById('off-desc').innerText = translations[lang].offD;
             renderProducts(activeFilter);
         }
 
@@ -167,31 +149,36 @@
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                
-                let priceParts = p.price.split('(');
-                let usdPart = priceParts[0].trim();
-                let tlPart = priceParts[1] ? '(' + priceParts[1] : '';
-
                 let imgs = p.images.map(i => `<div class="swiper-slide"><img src="${i}" onerror="this.parentElement.style.background='#000'; this.style.display='none';"></div>`).join('');
+                
+                let priceHtml = p.prices.map(pr => {
+                    let parts = pr.val.split('(');
+                    let usd = parts[0].trim();
+                    let tl = parts[1] ? '(' + parts[1] : '';
+                    return `
+                    <div class="price-item">
+                        <div class="price-text">
+                            <span style="font-size:11px; color:#888;">${pr.label}</span>
+                            <span class="price-val">${usd}</span>
+                            <span class="price-tl">${tl}</span>
+                        </div>
+                        <a href="https://wa.me/${phoneWA}?text=${translations[currentLang].msg}${p.name} (${pr.label}) - ${pr.val}" class="buy-btn-small">
+                            <i class="fa-brands fa-whatsapp"></i> ${translations[currentLang].buy}
+                        </a>
+                    </div>`;
+                }).join('');
 
                 card.innerHTML = `
                     <div class="swiper mySwiper"><div class="swiper-wrapper">${imgs}</div><div class="swiper-pagination"></div></div>
                     <div class="info">
                         <div class="model-name">${p.name}</div>
                         <div class="specs">${p.specs}</div>
-                        <div class="price-row">
-                            <span class="price-val">${usdPart}</span>
-                            <span class="price-tl">${tlPart}</span>
-                        </div>
-                        <a href="https://wa.me/${phoneWA}?text=${translations[currentLang].msg}${p.name} - ${usdPart}" class="buy-btn">
-                            <i class="fa-brands fa-whatsapp"></i> ${translations[currentLang].buy}
-                        </a>
+                        <div class="price-section">${priceHtml}</div>
                     </div>`;
                 list.appendChild(card);
             });
             new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", clickable: true }, observer: true, observeParents: true });
         }
-
         renderProducts();
     </script>
 </body>
