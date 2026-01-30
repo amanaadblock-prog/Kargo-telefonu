@@ -27,7 +27,19 @@
     "name": "Samsung S24",
     "specs": "Black | Täze | Iki görnüşli ýat",
     "price": "8/128GB: 490$ (22,295 TL) <br> 8/256GB: 555$ (25,252 TL)",
-    "images": ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg"]
+    "images": ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg", "s24_4.jpg"]
+  },
+  {
+    "name": "Redmi Note 15 Pro",
+    "specs": "8/256GB | Täze | Pro Performance",
+    "price": "280$ (12,740 TL)",
+    "images": ["note15pro_1.jpg", "note15pro_2.jpg", "note15pro_3.jpg", "note15pro_4.jpg"]
+  },
+  {
+    "name": "Redmi Note 15",
+    "specs": "8/256GB | Täze | Global Version",
+    "price": "225$ (10,237 TL)",
+    "images": ["note15_1.jpg", "note15_2.jpg", "note15_3.jpg", "note15_4.jpg"]
   },
   {
     "name": "Infinix Zero Flip",
@@ -42,10 +54,10 @@
     "images": ["zero30_1.jpg", "zero30_2.jpg", "zero30_3.jpg", "zero30_4.jpg"]
   },
   {
-    "name": "Redmi Note 15 Pro",
-    "specs": "8/256GB | Täze | Pro Performance",
-    "price": "280$ (12,740 TL)",
-    "images": ["note15pro_1.jpg", "note15pro_2.jpg", "note15pro_3.jpg", "note15pro_4.jpg"]
+    "name": "Infinix GT 30 Pro",
+    "specs": "12/256GB | Gaming Edition | 5G | Täze",
+    "price": "325$ (14,787 TL)",
+    "images": ["gt30_1.jpg", "gt30_2.jpg", "gt30_3.jpg", "gt30_4.jpg"]
   },
   {
     "name": "Infinix Note 50 Pro",
@@ -72,30 +84,6 @@
     "images": ["note40pro_1.jpg", "note40pro_2.jpg", "note40pro_3.jpg", "note40pro_4.jpg"]
   },
   {
-    "name": "Infinix Note 50",
-    "specs": "8/256GB | Täze | Standart Edition",
-    "price": "232$ (10,556 TL)",
-    "images": ["note50_1.jpg", "note50_2.jpg", "note50_3.jpg", "note50_4.jpg"]
-  },
-  {
-    "name": "Infinix Zero 40",
-    "specs": "8/256GB | Täze | 144Hz AMOLED",
-    "price": "232$ (10,556 TL)",
-    "images": ["zero40_1.jpg", "zero40_2.jpg", "zero40_3.jpg", "zero40_4.jpg"]
-  },
-  {
-    "name": "Redmi Note 15",
-    "specs": "8/256GB | Täze | Global Version",
-    "price": "225$ (10,237 TL)",
-    "images": ["note15_1.jpg", "note15_2.jpg", "note15_3.jpg", "note15_4.jpg"]
-  },
-  {
-    "name": "Infinix Hot 60 Pro+",
-    "specs": "8/256GB | Täze | Dynamic Design",
-    "price": "220$ (10,010 TL)",
-    "images": ["hot60pro+_1.jpg", "hot60pro+_2.jpg", "hot60pro+_3.jpg", "hot60pro+_4.jpg"]
-  },
-  {
     "name": "Samsung A56",
     "specs": "8/128GB | Täze | Gara, Ak, Benewşe",
     "price": "313$ (14,241 TL)",
@@ -112,12 +100,6 @@
     "specs": "6/128GB | Täze | Netijeli Model",
     "price": "215$ (9,782 TL)",
     "images": ["a26_1.jpg", "a26_2.jpg", "a26_3.jpg", "a26_4.jpg"]
-  },
-  {
-    "name": "Infinix X Pad 20",
-    "specs": "4/128GB | Täze | Tablet Edition",
-    "price": "175$ (7,963 TL)",
-    "images": ["xpad20_1.jpg", "xpad20_2.jpg", "xpad20_3.jpg", "xpad20_4.jpg"]
   },
   {
     "name": "Samsung A17",
@@ -144,39 +126,9 @@
     "images": ["hot60i_1.jpg", "hot60i_2.jpg", "hot60i_3.jpg", "hot60i_4.jpg"]
   },
   {
-    "name": "Infinix Hot 40i",
-    "specs": "8/128GB | Täze | Gara, Altyn, Gök",
-    "price": "145$ (6,597 TL)",
-    "images": ["hot40i_1.jpg", "hot40i_2.jpg", "hot40i_3.jpg", "hot40i_4.jpg"]
-  },
-  {
     "name": "Infinix Smart 10",
     "specs": "Täze | Iki görnüşli ýat",
     "price": "3/64GB: 105$ (4,777 TL) <br> 4/128GB: 115$ (5,232 TL)",
     "images": ["smart10_1.jpg", "smart10_2.jpg", "smart10_3.jpg", "smart10_4.jpg"]
-  },
-  {
-    "name": "Infinix Smart 10 HD",
-    "specs": "3/64GB | Täze | Ak, Gara, Gök",
-    "price": "100$ (4,550 TL)",
-    "images": ["smart10hd_1.jpg", "smart10hd_2.jpg", "smart10hd_3.jpg", "smart10hd_4.jpg"]
-  },
-  {
-    "name": "Infinix Smart 8 Pro",
-    "specs": "Täze | Iki görnüşli ýat",
-    "price": "4/64GB: 107$ (4,869 TL) <br> 4/128GB: 120$ (5,460 TL)",
-    "images": ["smart8pro_1.jpg", "smart8pro_2.jpg", "smart8pro_3.jpg", "smart8pro_4.jpg"]
-  },
-  {
-    "name": "Infinix Smart 8",
-    "specs": "Täze | Iki görnüşli ýat",
-    "price": "2/64GB: 93$ (4,232 TL) <br> 4/64GB: 107$ (4,869 TL)",
-    "images": ["smart8_1.jpg", "smart8_2.jpg", "smart8_3.jpg", "smart8_4.jpg"]
-  },
-  {
-    "name": "Infinix GT 30 Pro",
-    "specs": "12/256GB | Gaming Edition | 5G | Täze",
-    "price": "325$ (14,787 TL)",
-    "images": ["gt30_1.jpg", "gt30_2.jpg", "gt30_3.jpg", "gt30_4.jpg"]
   }
 ]
