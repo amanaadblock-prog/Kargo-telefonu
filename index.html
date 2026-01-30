@@ -7,27 +7,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
+        /* Seniň original dizaýnyň we reňkleriň */
         :root { --gold: #f1c40f; --dark-bg: #0c0c0c; --card-bg: #161616; --text-white: #ffffff; }
         body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-white); margin: 0; padding-bottom: 30px; }
+        
         #offline-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
         #offline-overlay i { font-size: 70px; color: var(--gold); margin-bottom: 20px; }
+
         .lang-bar { padding-top: calc(env(safe-area-inset-top) + 10px); background: #000; padding-bottom: 12px; display: flex; justify-content: center; gap: 8px; border-bottom: 1px solid #222; }
         .lang-bar button { background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; }
         .lang-bar button.active { background: var(--gold); color: #000; font-weight: bold; }
+
         header { padding: 15px 20px; text-align: center; }
         header h1 { margin: 0; font-size: 24px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+
         .brand-nav { display: flex; justify-content: space-around; padding: 10px 5px; background: #0c0c0c; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 999; }
         .brand-item { text-align: center; cursor: pointer; flex: 1; }
         .brand-item i { font-size: 18px; display: block; margin-bottom: 4px; color: #555; }
         .brand-item span { font-size: 9px; font-weight: bold; color: #555; text-transform: uppercase; }
         .brand-item.active i, .brand-item.active span { color: var(--gold); }
+
         .container { padding: 12px; }
         .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #222; margin-bottom: 25px; }
         .swiper { width: 100%; height: 320px; background: #000; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
+        
         .info { padding: 18px; }
         .model-name { font-size: 19px; font-weight: 800; margin-bottom: 5px; }
         .specs { color: #888; font-size: 13px; margin-bottom: 15px; }
+        
         .price-section { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; border-top: 1px solid #222; padding-top: 15px; }
         .price-item { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 10px; border-radius: 12px; }
         .price-text { display: flex; flex-direction: column; }
@@ -44,7 +52,9 @@
         <button onclick="changeLang('ru')" id="btn-ru">RU</button>
         <button onclick="changeLang('en')" id="btn-en">EN</button>
     </div>
+    
     <header><h1>Kargo Mobile</h1></header>
+
     <div class="brand-nav">
         <div class="brand-item active" onclick="setFilter('all', this)"><i class="fa-solid fa-border-all"></i><span id="t-all">Hemmesi</span></div>
         <div class="brand-item" onclick="setFilter('iPhone', this)"><i class="fa-brands fa-apple"></i><span>iPhone</span></div>
@@ -52,6 +62,7 @@
         <div class="brand-item" onclick="setFilter('Infinix', this)"><i class="fa-solid fa-bolt"></i><span>Infinix</span></div>
         <div class="brand-item" onclick="setFilter('Redmi', this)"><i class="fa-solid fa-mobile"></i><span>Redmi</span></div>
     </div>
+
     <div class="container" id="product-list"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -65,30 +76,35 @@
         };
 
         const products = [
-            // iPhone
+            // IPHONE MODELLERI
             { name: "iPhone 17 Pro Max", brand: "iPhone", specs: "256GB | Blue | Täze", prices: [{label: "256GB", val: "1,405$ (63,927 TL)"}], images: ["max1.jpg", "max2.jpg", "max3.jpg", "max4.jpg"] },
-            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | Aktiv", prices: [{label: "256GB", val: "1,300$ (59,150 TL)"}], images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp"] },
+            { name: "iPhone 17 Pro", brand: "iPhone", specs: "256GB | Silver | Aktiv", prices: [{label: "256GB", val: "1,300$ (59,150 TL)"}], images: ["shopping.webp", "surat2.webp", "surat3.webp", "surat4.webp", "surat5.webp", "surat6.webp", "surat7.webp"] },
             { name: "iPhone 17 Pro Orange", brand: "iPhone", specs: "256GB | Orange | Täze", prices: [{label: "256GB", val: "1,300$ (59,150 TL)"}], images: ["orange1.jpg", "orange2.jpg", "orange3.jpg", "orange4.jpg"] },
             
-            // Samsung
+            // SAMSUNG MODELLERI
             { name: "Samsung S25 Ultra", brand: "Samsung", specs: "12/256GB | Täze", prices: [{label: "12/256GB", val: "920$ (41,860 TL)"}], images: ["s25u_1.jpg", "s25u_2.jpg", "s25u_3.jpg", "s25u_4.jpg"] },
             { name: "Samsung S24", brand: "Samsung", specs: "Black | Täze", prices: [{label: "8/128GB", val: "490$ (22,295 TL)"}, {label: "8/256GB", val: "555$ (25,252 TL)"}], images: ["s24_1.jpg", "s24_2.jpg", "s24_3.jpg", "s24_4.jpg"] },
             { name: "Samsung A56", brand: "Samsung", specs: "8/128GB | Täze", prices: [{label: "8/128GB", val: "313$ (14,241 TL)"}], images: ["a56_1.jpg", "a56_2.jpg", "a56_3.jpg", "a56_4.jpg"] },
             { name: "Samsung A36", brand: "Samsung", specs: "8/128GB | Täze", prices: [{label: "8/128GB", val: "260$ (11,830 TL)"}], images: ["a36_1.jpg", "a36_2.jpg", "a36_3.jpg", "a36_4.jpg"] },
             { name: "Samsung A26", brand: "Samsung", specs: "6/128GB | Täze", prices: [{label: "6/128GB", val: "215$ (9,782 TL)"}], images: ["a26_1.jpg", "a26_2.jpg", "a26_3.jpg", "a26_4.jpg"] },
-            { name: "Samsung A17", brand: "Samsung", specs: "Täze | 2 Görnüş", prices: [{label: "4/128GB", val: "173$ (7,871 TL)"}, {label: "6/128GB", val: "185$ (8,417 TL)"}], images: ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"] },
-            { name: "Samsung A16", brand: "Samsung", specs: "8/256GB | Täze", prices: [{label: "8/256GB", val: "200$ (9,100 TL)"}], images: ["a16_1.jpg", "a16_2.jpg", "a16_3.jpg", "a16_4.jpg"] },
+            { name: "Samsung A17", brand: "Samsung", specs: "Täze Model", prices: [{label: "4/128GB", val: "173$ (7,871 TL)"}, {label: "6/128GB", val: "185$ (8,417 TL)"}], images: ["a17_1.jpg", "a17_2.jpg", "a17_3.jpg", "a17_4.jpg"] },
+            { name: "Samsung A16", brand: "Samsung", specs: "8/256GB | Täze", prices: [{label: "8/256GB", val: "200$ (9,100 TL)"}], images: ["a16_1.jpg", "a16_2.jpg", "a16_3.jpg", "a16_4.jpg", "a16_5.jpg", "a16_6.jpg"] },
             { name: "Samsung A07", brand: "Samsung", specs: "4/64GB | Täze", prices: [{label: "4/64GB", val: "162$ (7,371 TL)"}], images: ["a07_1.jpg", "a07_2.jpg", "a07_3.jpg", "a07_4.jpg"] },
-            
-            // Infinix
+
+            // INFINIX MODELLERI
             { name: "Infinix Zero Flip", brand: "Infinix", specs: "16/512GB | Foldable", prices: [{label: "16/512GB", val: "440$ (20,020 TL)"}], images: ["zf_1.jpg", "zf_2.jpg", "zf_3.jpg", "zf_4.jpg"] },
             { name: "Infinix Zero 30 5G", brand: "Infinix", specs: "12/256GB | 4K Cam", prices: [{label: "12/256GB", val: "305$ (13,877 TL)"}], images: ["z30_1.jpg", "z30_2.jpg", "z30_3.jpg", "z30_4.jpg"] },
             { name: "Infinix GT 30 Pro", brand: "Infinix", specs: "12/256GB | Gaming", prices: [{label: "12/256GB", val: "325$ (14,787 TL)"}], images: ["gt30_1.jpg", "gt30_2.jpg", "gt30_3.jpg", "gt30_4.jpg"] },
+            { name: "Infinix Note 50 Pro", brand: "Infinix", specs: "12/256GB | Täze Model", prices: [{label: "12/256GB", val: "265$ (12,058 TL)"}], images: ["n50p_1.jpg", "n50p_2.jpg", "n50p_3.jpg", "n50p_4.jpg"] },
+            { name: "Infinix Note 50S", brand: "Infinix", specs: "8/256GB | Grey", prices: [{label: "8/256GB", val: "260$ (11,830 TL)"}], images: ["n50s_1.jpg", "n50s_2.jpg", "n50s_3.jpg", "n50s_4.jpg"] },
+            { name: "Infinix Note 40 Pro", brand: "Infinix", specs: "8/256GB | Täze", prices: [{label: "8/256GB", val: "250$ (11,375 TL)"}], images: ["n40p_1.jpg", "n40p_2.jpg", "n40p_3.jpg", "n40p_4.jpg"] },
             { name: "Infinix Hot 60i", brand: "Infinix", specs: "Täze | 2 Görnüş", prices: [{label: "4/128GB", val: "132$ (6,006 TL)"}, {label: "4/256GB", val: "150$ (6,825 TL)"}], images: ["h60_1.jpg", "h60_2.jpg", "h60_3.jpg", "h60_4.jpg"] },
+            { name: "Infinix Smart 10", brand: "Infinix", specs: "Täze | 2 Görnüş", prices: [{label: "3/64GB", val: "105$ (4,777 TL)"}, {label: "4/128GB", val: "115$ (5,232 TL)"}], images: ["s10_1.jpg", "s10_2.jpg", "s10_3.jpg", "s10_4.jpg"] },
 
-            // Redmi
-            { name: "Redmi Note 15 Pro", brand: "Redmi", specs: "8/256GB | Täze", prices: [{label: "8/256GB", val: "280$ (12,740 TL)"}], images: ["r15p_1.jpg", "r15p_2.jpg", "r15p_3.jpg", "r15p_4.jpg"] },
-            { name: "Redmi Note 15", brand: "Redmi", specs: "8/256GB | Global", prices: [{label: "8/256GB", val: "225$ (10,237 TL)"}], images: ["r15_1.jpg", "r15_2.jpg", "r15_3.jpg", "r15_4.jpg"] }
+            // REDMI MODELLERI
+            { name: "Redmi Note 15 Pro", brand: "Redmi", specs: "8/256GB | Täze Model", prices: [{label: "8/256GB", val: "280$ (12,740 TL)"}], images: ["r15p_1.jpg", "r15p_2.jpg", "r15p_3.jpg", "r15p_4.jpg"] },
+            { name: "Redmi Note 15", brand: "Redmi", specs: "8/256GB | Global", prices: [{label: "8/256GB", val: "225$ (10,237 TL)"}], images: ["r15_1.jpg", "r15_2.jpg", "r15_3.jpg", "r15_4.jpg"] },
+            { name: "Tecno Camon 40 Pro", brand: "Redmi", specs: "8/256GB | Täze Model", prices: [{label: "8/256GB", val: "250$ (11,375 TL)"}], images: ["c40_1.jpg", "c40_2.jpg", "c40_3.jpg", "c40_4.jpg"] }
         ];
 
         let currentLang = 'tm'; let activeFilter = 'all';
